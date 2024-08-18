@@ -1,0 +1,12 @@
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Domain\bin\Debug\net8.0\ToyManagementProject.Domain.deps.json
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Domain\bin\Debug\net8.0\ToyManagementProject.Domain.dll
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Domain\bin\Debug\net8.0\ToyManagementProject.Domain.pdb
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Domain\obj\Debug\net8.0\ToyManagementProject.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Domain\obj\Debug\net8.0\ToyManagementProject.Domain.AssemblyInfoInputs.cache
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Domain\obj\Debug\net8.0\ToyManagementProject.Domain.AssemblyInfo.cs
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Domain\obj\Debug\net8.0\ToyManagementProject.Domain.csproj.CoreCompileInputs.cache
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Domain\obj\Debug\net8.0\ToyManagementProject.Domain.sourcelink.json
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Domain\obj\Debug\net8.0\ToyManagementProject.Domain.dll
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Domain\obj\Debug\net8.0\refint\ToyManagementProject.Domain.dll
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Domain\obj\Debug\net8.0\ToyManagementProject.Domain.pdb
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Domain\obj\Debug\net8.0\ref\ToyManagementProject.Domain.dll

@@ -1,0 +1,12 @@
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Infra.Data\bin\Debug\net8.0\ToyManagementProject.Infra.Data.deps.json
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Infra.Data\bin\Debug\net8.0\ToyManagementProject.Infra.Data.dll
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Infra.Data\bin\Debug\net8.0\ToyManagementProject.Infra.Data.pdb
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Infra.Data\obj\Debug\net8.0\ToyManagementProject.Infra.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Infra.Data\obj\Debug\net8.0\ToyManagementProject.Infra.Data.AssemblyInfoInputs.cache
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Infra.Data\obj\Debug\net8.0\ToyManagementProject.Infra.Data.AssemblyInfo.cs
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Infra.Data\obj\Debug\net8.0\ToyManagementProject.Infra.Data.csproj.CoreCompileInputs.cache
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Infra.Data\obj\Debug\net8.0\ToyManagementProject.Infra.Data.sourcelink.json
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Infra.Data\obj\Debug\net8.0\ToyManagementProject.Infra.Data.dll
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Infra.Data\obj\Debug\net8.0\refint\ToyManagementProject.Infra.Data.dll
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Infra.Data\obj\Debug\net8.0\ToyManagementProject.Infra.Data.pdb
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Infra.Data\obj\Debug\net8.0\ref\ToyManagementProject.Infra.Data.dll

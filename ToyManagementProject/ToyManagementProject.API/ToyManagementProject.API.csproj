@@ -7,7 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.8" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ToyManagementProject.Domain\ToyManagementProject.Domain.csproj" />
+    <ProjectReference Include="..\ToyManagementProject.Infra.Data\ToyManagementProject.Infra.Data.csproj" />
+    <ProjectReference Include="..\ToyManagementProject.Services\ToyManagementProject.Services.csproj" />
   </ItemGroup>
 
 </Project>

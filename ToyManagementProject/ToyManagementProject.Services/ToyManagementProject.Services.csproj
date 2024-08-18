@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ToyManagementProject.Domain\ToyManagementProject.Domain.csproj" />
+    <ProjectReference Include="..\ToyManagementProject.Infra.Data\ToyManagementProject.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>

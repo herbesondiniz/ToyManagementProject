@@ -9,6 +9,8 @@ C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\bin
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\bin\Debug\net8.0\ToyManagementProject.Domain.dll
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\bin\Debug\net8.0\ToyManagementProject.Domain.pdb
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\ToyManagementProject.API.csproj.AssemblyReference.cache
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\ToyManagementProject.API.GeneratedMSBuildEditorConfig.editorconfig
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\ToyManagementProject.API.AssemblyInfoInputs.cache
@@ -31,3 +33,10 @@ C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\ToyManagementProject.API.pdb
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\ToyManagementProject.API.genruntimeconfig.cache
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\ref\ToyManagementProject.API.dll
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\bin\Debug\net8.0\ToyManagementProject.Infra.Data.dll
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\bin\Debug\net8.0\ToyManagementProject.Services.dll
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\bin\Debug\net8.0\ToyManagementProject.Infra.Data.pdb
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\bin\Debug\net8.0\ToyManagementProject.Services.pdb
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll

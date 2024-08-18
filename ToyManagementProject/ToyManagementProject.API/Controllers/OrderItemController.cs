@@ -15,14 +15,15 @@ namespace ToyManagementProject.API.Controllers
 			_orderItemService = orderItemService;
 		}
 		[HttpGet]
-		public async Task<ActionResult<List<Toy>>> GetAll()
+		public async Task<ActionResult<List<OrderItem>>> GetAll()
 		{
-			var toys = await _orderItemService.GetAllAsync();
-			return Ok(toys);
+			var orderItems = await _orderItemService.GetAllAsync();			
+			
+			return Ok(orderItems);
 		}
 
 		[HttpGet("{id}")]
-		public async Task<ActionResult<Toy>> GetById(int id)
+		public async Task<ActionResult<OrderItem>> GetById(int id)
 		{
 			var orderItem = await _orderItemService.GetByIdAsync(id);
 			if (orderItem == null)

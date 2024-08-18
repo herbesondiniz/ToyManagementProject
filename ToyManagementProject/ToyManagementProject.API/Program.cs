@@ -19,8 +19,15 @@ builder.Services.AddDbContext<ToyDbContext>(options =>
 
 builder.Services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
 builder.Services.AddScoped(typeof(IServiceBase<>), typeof(ServiceBase<>));
+
 builder.Services.AddScoped<IToyRepository,ToyRepository>();
 builder.Services.AddScoped<IToyService, ToyService>();
+builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+builder.Services.AddScoped<IOrderItemService, OrderItemService>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IStockRepository, StockRepository>();
+builder.Services.AddScoped<IStockService, StockService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

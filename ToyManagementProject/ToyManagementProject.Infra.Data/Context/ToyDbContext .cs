@@ -9,5 +9,7 @@ namespace ToyManagementProject.Infra.Data.Context
 		{
 		}
 		public DbSet<Toy> Toys { get; set; }
+		public DbSet<Order> Order { get; set; }
+		public DbSet<OrderItem> OrderItem { get; set; }
 	}
 }

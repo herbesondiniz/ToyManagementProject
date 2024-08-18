@@ -1,6 +1,6 @@
 @ToyManagementProject.API_HostAddress = http://localhost:5081
 
-GET {{ToyManagementProject.API_HostAddress}}/weatherforecast/
+GET {{ToyManagementProject.API_HostAddress}}/Toys/
 Accept: application/json
 
 ###

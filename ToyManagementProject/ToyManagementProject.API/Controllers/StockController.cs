@@ -9,10 +9,12 @@ namespace StockManagementProject.API.Controllers
 	public class StockController : ControllerBase
 	{
 		private readonly IStockService _StockService;
+		private readonly IToyService _toyService;
 
-		public StockController(IStockService StockService)
+		public StockController(IStockService StockService, IToyService toyService)
 		{
 			_StockService = StockService;
+			_toyService = toyService;
 		}
 		[HttpGet]
 		public async Task<ActionResult<List<Stock>>> GetAll()
@@ -35,7 +37,16 @@ namespace StockManagementProject.API.Controllers
 		[HttpPost]
 		public async Task<ActionResult> Create(Stock stock)
 		{
+			var toy = _toyService.GetByIdAsync(stock.ToyId);
+			
+			if(toy == null)
+				return NotFound("This toy is not registered. Please, you need to register it before.");
+
+			if (stock.Quantity <= 0)
+				return NotFound("Quantity is not filled");
+
 			await _StockService.AddAsync(stock);
+			
 			return CreatedAtAction(nameof(GetById), new { id = stock.Id }, stock);
 		}
 
@@ -46,6 +57,11 @@ namespace StockManagementProject.API.Controllers
 			{
 				return BadRequest();
 			}
+
+			var toy = _toyService.GetByIdAsync(stock.ToyId);
+
+			if (toy == null)
+				return NotFound("This toy is not registered.");
 
 			await _StockService.UpdateAsync(stock);
 			return NoContent();

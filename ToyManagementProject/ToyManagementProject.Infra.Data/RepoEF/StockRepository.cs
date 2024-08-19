@@ -13,8 +13,7 @@ namespace ToyManagementProject.Infra.Data.RepoEF
 		private readonly IRepositoryBase<Stock> _repository;
         public StockRepository(IRepositoryBase<Stock> repository)
         {
-			_repository = repository;
-
+			_repository = repository;			
 		}
         public async Task AddAsync(Stock obj)
 		{
@@ -34,6 +33,13 @@ namespace ToyManagementProject.Infra.Data.RepoEF
 		public async Task<Stock> GetByIdAsync(int id)
 		{
 			return await _repository.GetByIdAsync(id);
+		}
+
+		public async Task<Stock> GetStockByToyIdAsync(int toyId)
+		{								
+			var stocks = await _repository.GetAllAsync();
+			
+			return stocks.FirstOrDefault(x => x.ToyId == toyId);			
 		}
 
 		public async Task UpdateAsync(Stock obj)

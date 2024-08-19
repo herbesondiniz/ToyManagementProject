@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Services;
+using ToyManagementProject.Infra.Data.UoW;
 
 namespace ToyManagementProject.API.Controllers
 {
@@ -9,10 +10,12 @@ namespace ToyManagementProject.API.Controllers
 	public class ToysController : ControllerBase
 	{
 		private readonly IToyService _toyService;
+		private readonly IUnitOfWork _uow;
 
-		public ToysController(IToyService toyService)
+		public ToysController(IToyService toyService, IUnitOfWork uow)
 		{
 			_toyService = toyService;
+			_uow = uow;
 		}
 		[HttpGet]
 		public async Task<ActionResult<List<Toy>>> GetAll()
@@ -35,7 +38,18 @@ namespace ToyManagementProject.API.Controllers
 		[HttpPost]
 		public async Task<ActionResult> Create(Toy toy)
 		{
-			await _toyService.AddAsync(toy);
+			try
+			{
+				_toyService.AddAsync(toy);
+				
+				await _uow.Commit();
+			}
+			catch (Exception)
+			{
+
+				await _uow.Rollback();
+			}
+			
 			return CreatedAtAction(nameof(GetById), new { id = toy.Id }, toy);
 		}
 
@@ -47,7 +61,18 @@ namespace ToyManagementProject.API.Controllers
 				return BadRequest();
 			}
 
-			await _toyService.UpdateAsync(toy);
+			try
+			{
+				await _toyService.UpdateAsync(toy);
+
+				await _uow.Commit();
+			}
+			catch (Exception)
+			{
+
+				await _uow.Rollback();
+			}
+			
 			return NoContent();
 		}
 
@@ -60,7 +85,18 @@ namespace ToyManagementProject.API.Controllers
 				return NotFound();
 			}
 
-			await _toyService.DeleteAsync(id);
+			try
+			{
+				await _toyService.DeleteAsync(id);
+				
+				await _uow.Commit();
+			}
+			catch (Exception)
+			{
+
+				await _uow.Rollback();
+			}
+			
 			return NoContent();
 		}
 	}

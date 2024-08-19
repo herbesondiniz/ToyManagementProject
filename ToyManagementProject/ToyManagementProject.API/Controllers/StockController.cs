@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Services;
+using ToyManagementProject.Infra.Data.UoW;
 
 namespace StockManagementProject.API.Controllers
 {
@@ -8,25 +9,27 @@ namespace StockManagementProject.API.Controllers
 	[Route("[controller]")]	
 	public class StockController : ControllerBase
 	{
-		private readonly IStockService _StockService;
+		private readonly IStockService _stockService;
 		private readonly IToyService _toyService;
+		private readonly IUnitOfWork _uow;
 
-		public StockController(IStockService StockService, IToyService toyService)
+		public StockController(IStockService StockService, IToyService toyService, IUnitOfWork uow)
 		{
-			_StockService = StockService;
+			_stockService = StockService;
 			_toyService = toyService;
+			_uow = uow;
 		}
 		[HttpGet]
 		public async Task<ActionResult<List<Stock>>> GetAll()
 		{
-			var stocks = await _StockService.GetAllAsync();
+			var stocks = await _stockService.GetAllAsync();
 			return Ok(stocks);
 		}
 
 		[HttpGet("{id}")]
 		public async Task<ActionResult<Stock>> GetById(int id)
 		{
-			var stock = await _StockService.GetByIdAsync(id);
+			var stock = await _stockService.GetByIdAsync(id);
 			if (stock == null)
 			{
 				return NotFound();
@@ -44,8 +47,16 @@ namespace StockManagementProject.API.Controllers
 
 			if (stock.Quantity <= 0)
 				return NotFound("Quantity is not filled");
-
-			await _StockService.AddAsync(stock);
+			try
+			{
+				await _stockService.AddAsync(stock);
+				
+				await _uow.Commit();
+			}
+			catch (Exception)
+			{
+				await _uow.Rollback();
+			}
 			
 			return CreatedAtAction(nameof(GetById), new { id = stock.Id }, stock);
 		}
@@ -63,20 +74,40 @@ namespace StockManagementProject.API.Controllers
 			if (toy == null)
 				return NotFound("This toy is not registered.");
 
-			await _StockService.UpdateAsync(stock);
+			try
+			{
+				await _stockService.UpdateAsync(stock);
+
+				await _uow.Commit();
+			}
+			catch (Exception)
+			{
+				await _uow.Rollback();
+			}
+		
 			return NoContent();
 		}
 
 		[HttpDelete("{id}")]
 		public async Task<ActionResult> Delete(int id)
 		{
-			var stock = await _StockService.GetByIdAsync(id);
+			var stock = await _stockService.GetByIdAsync(id);
 			if (stock == null)
 			{
 				return NotFound();
 			}
 
-			await _StockService.DeleteAsync(id);
+			try
+			{
+				await _stockService.DeleteAsync(id);
+				
+				await _uow.Commit();
+			}
+			catch (Exception)
+			{
+				await _uow.Rollback();			
+			}
+			
 			return NoContent();
 		}
 	}

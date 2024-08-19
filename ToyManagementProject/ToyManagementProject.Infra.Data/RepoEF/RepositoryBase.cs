@@ -14,16 +14,14 @@ namespace ToyManagementProject.Infra.Data.RepoEF
 		}
 		public async Task AddAsync(TEntity obj)
 		{
-			_context.Set<TEntity>().Add(obj);
-			//await _context.SaveChangesAsync();
+			_context.Set<TEntity>().Add(obj);			
 		}
 		public async Task DeleteAsync(int id)
 		{
 			var obj = await _context.Set<TEntity>().FindAsync(id);
 			if (obj != null)
 			{
-				_context.Set<TEntity>().Remove(obj);
-				//await _context.SaveChangesAsync();
+				_context.Set<TEntity>().Remove(obj);				
 			}
 		}
 		public async Task<List<TEntity>> GetAllAsync()
@@ -37,8 +35,7 @@ namespace ToyManagementProject.Infra.Data.RepoEF
 		}
 		public async Task UpdateAsync(TEntity obj)
 		{
-			_context.Set<TEntity>().Update(obj);
-			//await _context.SaveChangesAsync();
+			_context.Set<TEntity>().Update(obj);		
 		}
 	}
 }

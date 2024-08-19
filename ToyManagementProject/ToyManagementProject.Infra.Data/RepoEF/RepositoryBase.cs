@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Repositories;
 using ToyManagementProject.Infra.Data.Context;
 
@@ -34,7 +35,7 @@ namespace ToyManagementProject.Infra.Data.RepoEF
 			return await _context.Set<TEntity>().FindAsync(id);
 		}
 		public async Task UpdateAsync(TEntity obj)
-		{
+		{			
 			_context.Set<TEntity>().Update(obj);		
 		}
 	}

@@ -11,7 +11,7 @@ namespace ToyManagementProject.Domain.Entities
 			get 
 			{ 				
 				return Items?.Sum(item => item.Quantity * item.Price) ?? 0;
-			} 
+			} 			
 		}
 
 		public bool IsValid(Order order)

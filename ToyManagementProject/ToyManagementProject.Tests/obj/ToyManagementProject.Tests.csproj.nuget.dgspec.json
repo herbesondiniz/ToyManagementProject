@@ -1,0 +1,383 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Tests\\ToyManagementProject.Tests.csproj": {}
+  },
+  "projects": {
+    "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.API\\ToyManagementProject.API.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.API\\ToyManagementProject.API.csproj",
+        "projectName": "ToyManagementProject.API",
+        "projectPath": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.API\\ToyManagementProject.API.csproj",
+        "packagesPath": "C:\\Users\\Herbeson\\.nuget\\packages\\",
+        "outputPath": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.API\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Herbeson\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Domain\\ToyManagementProject.Domain.csproj": {
+                "projectPath": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Domain\\ToyManagementProject.Domain.csproj"
+              },
+              "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Infra.Data\\ToyManagementProject.Infra.Data.csproj": {
+                "projectPath": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Infra.Data\\ToyManagementProject.Infra.Data.csproj"
+              },
+              "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Services\\ToyManagementProject.Services.csproj": {
+                "projectPath": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Services\\ToyManagementProject.Services.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Domain\\ToyManagementProject.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Domain\\ToyManagementProject.Domain.csproj",
+        "projectName": "ToyManagementProject.Domain",
+        "projectPath": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Domain\\ToyManagementProject.Domain.csproj",
+        "packagesPath": "C:\\Users\\Herbeson\\.nuget\\packages\\",
+        "outputPath": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Herbeson\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Infra.Data\\ToyManagementProject.Infra.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Infra.Data\\ToyManagementProject.Infra.Data.csproj",
+        "projectName": "ToyManagementProject.Infra.Data",
+        "projectPath": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Infra.Data\\ToyManagementProject.Infra.Data.csproj",
+        "packagesPath": "C:\\Users\\Herbeson\\.nuget\\packages\\",
+        "outputPath": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Infra.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Herbeson\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Domain\\ToyManagementProject.Domain.csproj": {
+                "projectPath": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Domain\\ToyManagementProject.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Services\\ToyManagementProject.Services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Services\\ToyManagementProject.Services.csproj",
+        "projectName": "ToyManagementProject.Services",
+        "projectPath": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Services\\ToyManagementProject.Services.csproj",
+        "packagesPath": "C:\\Users\\Herbeson\\.nuget\\packages\\",
+        "outputPath": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Services\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Herbeson\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Domain\\ToyManagementProject.Domain.csproj": {
+                "projectPath": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Domain\\ToyManagementProject.Domain.csproj"
+              },
+              "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Infra.Data\\ToyManagementProject.Infra.Data.csproj": {
+                "projectPath": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Infra.Data\\ToyManagementProject.Infra.Data.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Tests\\ToyManagementProject.Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Tests\\ToyManagementProject.Tests.csproj",
+        "projectName": "ToyManagementProject.Tests",
+        "projectPath": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Tests\\ToyManagementProject.Tests.csproj",
+        "packagesPath": "C:\\Users\\Herbeson\\.nuget\\packages\\",
+        "outputPath": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Tests\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Herbeson\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.API\\ToyManagementProject.API.csproj": {
+                "projectPath": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.API\\ToyManagementProject.API.csproj"
+              },
+              "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Domain\\ToyManagementProject.Domain.csproj": {
+                "projectPath": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Domain\\ToyManagementProject.Domain.csproj"
+              },
+              "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Infra.Data\\ToyManagementProject.Infra.Data.csproj": {
+                "projectPath": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Infra.Data\\ToyManagementProject.Infra.Data.csproj"
+              },
+              "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Services\\ToyManagementProject.Services.csproj": {
+                "projectPath": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Services\\ToyManagementProject.Services.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.8.0, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.20.70, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.5.3, )"
+            },
+            "xunit.runner.visualstudio": {
+              "target": "Package",
+              "version": "[2.5.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

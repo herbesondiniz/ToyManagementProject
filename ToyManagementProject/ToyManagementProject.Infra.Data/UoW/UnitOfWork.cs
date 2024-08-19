@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using ToyManagementProject.Domain.Interfaces.Repositories;
-using ToyManagementProject.Infra.Data.Context;
-using ToyManagementProject.Infra.Data.RepoEF;
+﻿using ToyManagementProject.Infra.Data.Context;
 
 namespace ToyManagementProject.Infra.Data.UoW
 {
@@ -19,11 +11,22 @@ namespace ToyManagementProject.Infra.Data.UoW
 		}
 		public async Task Commit()
 		{
-			await _dbContext.SaveChangesAsync();
+			try
+			{
+				await _dbContext.SaveChangesAsync();
+			}
+			catch (Exception)
+			{
+				throw;
+			}						
 		}
-
+	
 		public async Task Rollback()
 		{			
-		}		
+		}
+		public void Dispose()
+		{
+			_dbContext?.Dispose();
+		}
 	}
 }

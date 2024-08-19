@@ -50,45 +50,20 @@ namespace ToyManagementProject.API.Controllers
 		public async Task<ActionResult> Create(Order order)
 		{
 			if (order.ClientId == 0)
-				return NotFound("You need to pass a client");
-
-			if (!order.IsValid(order))
-				return NotFound("Your order is not all filled");
-
+				return NotFound("You need to send a client");
+			
 			try
 			{
-				order.Id = 0;
-				await _orderService.AddAsync(order);
+				var result = await _orderService.ProcessOrderAsync(order);
 
-				foreach (var orderItem in order.Items)
-				{
-					var toy = await _toyService.GetByIdAsync(orderItem.ToyId);
-
-					if (toy == null)
-						return NotFound("You need to register this toy before create an order item");
-
-					var stock = await _stockService.GetStockByToyIdAsync(orderItem.ToyId);
-
-					if (stock.Quantity <= 0)
-						return NotFound($"the Toy {stock.ToyId} don´t have stock.");
-
-					orderItem.Price = toy.Price;
-					orderItem.OrderId = order.Id;
-					stock.Quantity = stock.Quantity - orderItem.Quantity;
-
-					await _orderItemService.UpdateAsync(orderItem);
-
-					await _stockService.UpdateAsync(stock);
-
-					await _uow.Commit();
-				}
-
-				if (order.TotalAmount == 0)
+				if (!result || order.TotalAmount == 0)
 					return NotFound();
+
+				await _uow.Commit();
 
 				return CreatedAtAction(nameof(GetById), new { id = order.Id }, order);
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
 				await _uow.Rollback();
 				

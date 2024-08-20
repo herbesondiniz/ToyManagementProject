@@ -86,7 +86,7 @@ namespace ToyManagementProject.Services
 				if (toy == null) return false;
 
 				var stock = await _stockService.GetStockByToyIdAsync(orderItem.ToyId);
-				if (stock.Quantity <= 0) return false;
+				if (stock?.Quantity <= 0) return false;
 
 				orderItem.Price = toy.Price;
 				orderItem.OrderId = order.Id;

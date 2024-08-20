@@ -101,9 +101,18 @@ namespace ToyManagementProject.API.Controllers
 
 			if (order == null)
 				return NotFound();
+			try
+			{
+				await _orderService.DeleteAsync(id);
+			}
+			catch (Exception)
+			{
 
-			await _orderService.DeleteAsync(id);
-
+				await _uow.Rollback();
+			}
+			
+			await _uow.Commit();
+			
 			return NoContent();
 		}
 	}

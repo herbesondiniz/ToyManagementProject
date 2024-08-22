@@ -16,7 +16,7 @@ namespace ToyManagementProject.Domain.Entities
 
 		public bool IsValid(Order order)
 		{
-			return Items != null && Items.Any(x => x.OrderId == order.Id);
+			return (Items != null && Items.Any(x => x.OrderId == order.Id));
 		}
 	}
 }

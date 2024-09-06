@@ -2,7 +2,12 @@
 
 namespace ToyManagementProject.Domain.Interfaces.Services
 {
-	public interface IOrderItemService: IServiceBase<OrderItem>
+	public interface IOrderItemService
 	{
+		Task<List<OrderItem>> GetAllAsync();
+		Task<OrderItem> GetByIdAsync(int id);
+		Task AddAsync(OrderItem obj);
+		Task UpdateAsync(OrderItem obj);
+		Task DeleteAsync(int id);
 	}
 }

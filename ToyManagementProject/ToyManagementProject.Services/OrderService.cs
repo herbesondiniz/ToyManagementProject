@@ -10,23 +10,23 @@ using ToyManagementProject.Domain.DTOs;
 namespace ToyManagementProject.Services
 {
 	public class OrderService : IOrderService
-	{
-		private readonly IRepositoryBase<Order> _orderRepository;
-		private readonly IOrderItemRepository _orderItemRepository;
+	{		
+		private readonly IServiceBase<Order> _serviceBase;
+		private readonly IOrderItemService _orderItemService;
 		private readonly IUnitOfWork _uow;
 		private readonly IValidator<Order> _orderValidator;
 		private readonly IMapper _mapper;
 		private readonly IOrderProcessingService _orderProcessingService;
-		public OrderService(IRepositoryBase<Order> orderRepository,
-							IOrderItemRepository orderItemRepository,												
+		public OrderService(IServiceBase<Order> serviceBase,
+							IOrderItemService orderItemService,												
 							IUnitOfWork uow,
 							IValidator<Order> orderValidator,
 							IMapper mapper,
 							IOrderProcessingService orderProcessingService
 							)
 		{
-			_orderRepository = orderRepository;
-			_orderItemRepository = orderItemRepository;					
+			_serviceBase = serviceBase;
+			_orderItemService = orderItemService;					
 			_uow = uow;
 			_orderValidator = orderValidator;
 			_mapper = mapper;
@@ -57,7 +57,7 @@ namespace ToyManagementProject.Services
 
 			try
 			{
-				await _orderRepository.AddAsync(order);
+				await _serviceBase.AddAsync(order);
 				
 				await _uow.CommitAsync();
 				
@@ -74,21 +74,21 @@ namespace ToyManagementProject.Services
 
 		public async Task DeleteAsync(int id)
 		{
-			await _orderRepository.DeleteAsync(id);
+			await _serviceBase.DeleteAsync(id);
 		}
 
 		public async Task<Result<IEnumerable<OrderDTO>>> GetAllAsync()
 		{
 			try
 			{
-				var orders = await _orderRepository.GetAllAsync();
+				var orders = await _serviceBase.GetAllAsync();
 
 				if (orders == null || orders.Count == 0)
 				{
 					return Result<IEnumerable<OrderDTO>>.Success(Enumerable.Empty<OrderDTO>(), "Orders list is empty");
 				}
 
-				var allItems = await _orderItemRepository.GetAllAsync();
+				var allItems = await _orderItemService.GetAllAsync();
 				var itemsByOrderId = allItems.GroupBy(x => x.OrderId);
 
 				foreach (var order in orders)
@@ -110,9 +110,9 @@ namespace ToyManagementProject.Services
 
 		public async Task<Order> GetByIdAsync(int id)
 		{
-			var items = await _orderItemRepository.GetAllAsync();
+			var items = await _orderItemService.GetAllAsync();
 
-			var order = await (_orderRepository.GetByIdAsync(id));
+			var order = await (_serviceBase.GetByIdAsync(id));
 
 			items = items.Where(x => x.OrderId == id).ToList();
 
@@ -123,7 +123,7 @@ namespace ToyManagementProject.Services
 
 		public async Task UpdateAsync(Order obj)
 		{
-			await (_orderRepository.UpdateAsync(obj));
+			await (_serviceBase.UpdateAsync(obj));
 		}	
 	}
 }

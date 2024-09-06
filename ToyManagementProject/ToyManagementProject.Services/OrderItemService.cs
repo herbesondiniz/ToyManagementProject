@@ -6,32 +6,32 @@ namespace ToyManagementProject.Services
 {
 	public class OrderItemService : IOrderItemService
 	{
-		private readonly IRepositoryBase<OrderItem> _repository;
-        public OrderItemService(IRepositoryBase<OrderItem> repositoryBase)
+		private readonly IServiceBase<OrderItem> _serviceBase;
+        public OrderItemService(IServiceBase<OrderItem> serviceBase)
         {
-			_repository = repositoryBase;
+			_serviceBase = serviceBase;
 		}
         public async Task AddAsync(OrderItem obj)
 		{
-			await _repository.AddAsync(obj);
+			await _serviceBase.AddAsync(obj);
 		}
 
 		public async Task DeleteAsync(int id)
 		{
-			await _repository.DeleteAsync(id);
+			await _serviceBase.DeleteAsync(id);
 		}
 
 		public async Task<List<OrderItem>> GetAllAsync()
 		{
-			return await _repository.GetAllAsync();
+			return await _serviceBase.GetAllAsync();
 		}
 		public async Task<OrderItem> GetByIdAsync(int id)
 		{
-			return await _repository.GetByIdAsync(id);
+			return await _serviceBase.GetByIdAsync(id);
 		}
 		public async Task UpdateAsync(OrderItem obj)
 		{
-			await _repository.UpdateAsync(obj);
+			await _serviceBase.UpdateAsync(obj);
 		}
 	}
 }

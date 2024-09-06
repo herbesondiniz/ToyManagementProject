@@ -3,12 +3,12 @@ using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Repositories;
 using ToyManagementProject.Domain.Interfaces.Services;
 using ToyManagementProject.Domain.Mappings;
-using ToyManagementProject.Domain.Validators;
-using ToyManagementProject.Domain.Validators.Interfaces;
 using ToyManagementProject.Infra.Data.Context;
 using ToyManagementProject.Infra.Data.RepoEF;
 using ToyManagementProject.Infra.Data.UoW;
 using ToyManagementProject.Services;
+using ToyManagementProject.Services.Validators;
+using ToyManagementProject.Services.Validators.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

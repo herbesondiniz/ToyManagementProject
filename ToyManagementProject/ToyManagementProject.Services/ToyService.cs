@@ -3,8 +3,8 @@ using ToyManagementProject.Domain;
 using ToyManagementProject.Domain.DTOs;
 using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Services;
-using ToyManagementProject.Domain.Validators.Interfaces;
 using ToyManagementProject.Infra.Data.UoW;
+using ToyManagementProject.Services.Validators.Interfaces;
 
 namespace ToyManagementProject.Services
 {
@@ -66,14 +66,13 @@ namespace ToyManagementProject.Services
 			
 			toy.UpdateToy(toyDTO.Id, toyDTO.Name, toyDTO.Description, toyDTO.Price);
 
-			if ((toy.ErrorsNotifications.Any()))
+			if (toy.ErrorsNotifications.Any())
             {
 				return Result<ToyDTO>.Failure(toy.ErrorsNotifications);
 			}
 
             try
-			{
-				//await _uow.BeginTransactionAsync();
+			{				
 				await _serviceBase.UpdateAsync(toy);
 				await _uow.CommitAsync();
 

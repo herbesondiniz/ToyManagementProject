@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ToyManagementProject.Domain.Entities;
-using ToyManagementProject.Domain.Validators.Interfaces;
+﻿using ToyManagementProject.Domain.Entities;
+using ToyManagementProject.Services.Validators.Interfaces;
 
-namespace ToyManagementProject.Domain.Validators
+namespace ToyManagementProject.Services.Validators
 {
 	public class OrderValidator : IValidator<Order>
 	{

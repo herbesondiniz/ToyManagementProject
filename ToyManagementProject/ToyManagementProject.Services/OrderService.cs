@@ -3,9 +3,9 @@ using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Repositories;
 using ToyManagementProject.Domain.Interfaces.Services;
 using ToyManagementProject.Infra.Data.UoW;
-using ToyManagementProject.Domain.DTOs;
-using ToyManagementProject.Domain.Validators.Interfaces;
 using AutoMapper;
+using ToyManagementProject.Services.Validators.Interfaces;
+using ToyManagementProject.Domain.DTOs;
 
 namespace ToyManagementProject.Services
 {
@@ -70,7 +70,7 @@ namespace ToyManagementProject.Services
 				await _uow.RollbackAsync();
 				return Result<OrderDTO>.Failure(new List<string> { $"An error occurred while processing the order: {ex.Message} " });
 			}			
-		}
+		}	
 
 		public async Task DeleteAsync(int id)
 		{
@@ -124,7 +124,6 @@ namespace ToyManagementProject.Services
 		public async Task UpdateAsync(Order obj)
 		{
 			await (_orderRepository.UpdateAsync(obj));
-		}
-
+		}	
 	}
 }

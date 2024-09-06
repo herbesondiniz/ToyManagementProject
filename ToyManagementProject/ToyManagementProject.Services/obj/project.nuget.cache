@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "M6ilccF5YwEa3aG57QDSJXMmmpYAcbzhbjESK2bpsSqF2T860qVJVE4T0zOVX7gtinCx0g5GWG7MUdRcvr1Yww==",
+  "dgSpecHash": "vP6ps3z9dABTzFa1gzyMh95ljozj7V1yciPg8RiMT80NXpFNFx/VEABA9uq9kkwv26LpmHUhlVAosV+5LXPSZw==",
   "success": true,
   "projectFilePath": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Services\\ToyManagementProject.Services.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Herbeson\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Herbeson\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.8\\microsoft.entityframeworkcore.8.0.8.nupkg.sha512",
     "C:\\Users\\Herbeson\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.8\\microsoft.entityframeworkcore.abstractions.8.0.8.nupkg.sha512",
     "C:\\Users\\Herbeson\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.8\\microsoft.entityframeworkcore.analyzers.8.0.8.nupkg.sha512",

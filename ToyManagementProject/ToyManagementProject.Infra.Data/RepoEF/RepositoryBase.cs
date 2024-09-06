@@ -15,7 +15,7 @@ namespace ToyManagementProject.Infra.Data.RepoEF
 		}
 		public async Task AddAsync(TEntity obj)
 		{
-			_context.Set<TEntity>().Add(obj);			
+			await _context.Set<TEntity>().AddAsync(obj);			
 		}
 		public async Task DeleteAsync(int id)
 		{

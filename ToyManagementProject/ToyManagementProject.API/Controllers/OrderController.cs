@@ -2,7 +2,7 @@
 using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Services;
 using ToyManagementProject.Infra.Data.UoW;
-using ToyManagementProject.Services;
+using ToyManagementProject.Domain.DTOs;
 
 namespace ToyManagementProject.API.Controllers
 {
@@ -28,11 +28,11 @@ namespace ToyManagementProject.API.Controllers
 			_uow = uow;
 		}
 		[HttpGet]
-		public async Task<ActionResult<List<Order>>> GetAll()
+		public async Task<ActionResult<List<OrderDTO>>> GetAll()
 		{
-			var orders = await _orderService.GetAllAsync();
+			var ordersDTO = await _orderService.GetAllAsync();
 
-			return Ok(orders);
+			return Ok(ordersDTO);
 		}
 
 		[HttpGet("{id}")]
@@ -47,28 +47,15 @@ namespace ToyManagementProject.API.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> Create(Order order)
+		public async Task<ActionResult> Create(OrderDTO orderDTO)
 		{
-			if (order.ClientId == 0)
-				return NotFound("You need to send a client");
-			
-			try
-			{
-				var result = await _orderService.ProcessOrderAsync(order);
+			var result = await _orderService.AddAsync(orderDTO);
 
-				if (!result || order.TotalAmount == 0)
-					return NotFound();
+			if (!result.IsSuccess)
+				return UnprocessableEntity(result.Errors);			
 
-				await _uow.Commit();
+			return CreatedAtAction(nameof(GetById), new { id = result.Data.Id }, result.Data);
 
-				return CreatedAtAction(nameof(GetById), new { id = order.Id }, order);
-			}
-			catch (Exception ex)
-			{
-				await _uow.Rollback();
-				
-				return NotFound();
-			}
 		}
 
 		[HttpPut("{id}")]
@@ -77,20 +64,20 @@ namespace ToyManagementProject.API.Controllers
 			if (id != order.Id)
 				return BadRequest();
 
-			if (!order.IsValid(order))
-				return NotFound("Your order is not all filled");
+			//if (order.Notifications.Any())
+			//	return NotFound("Your order is not all filled");
 
 			try
 			{
 				await _orderService.UpdateAsync(order);
 
-				await _uow.Commit();
+				await _uow.CommitAsync();
 			}
 			catch (Exception)
 			{
-				await _uow.Rollback();
+				await _uow.RollbackAsync();
 			}
-			
+
 			return NoContent();
 		}
 
@@ -108,11 +95,11 @@ namespace ToyManagementProject.API.Controllers
 			catch (Exception)
 			{
 
-				await _uow.Rollback();
+				await _uow.RollbackAsync();
 			}
-			
-			await _uow.Commit();
-			
+
+			await _uow.CommitAsync();
+
 			return NoContent();
 		}
 	}

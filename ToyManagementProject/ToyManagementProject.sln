@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToyManagementProject.Domain
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToyManagementProject.API", "ToyManagementProject.API\ToyManagementProject.API.csproj", "{CE5CA26B-6429-4FF5-8C78-22F14E5E07CA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Services", "2. Services", "{DFD3F8C6-53FF-4982-8D05-E73509BE9BA7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Application", "2. Application", "{DFD3F8C6-53FF-4982-8D05-E73509BE9BA7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToyManagementProject.Services", "ToyManagementProject.Services\ToyManagementProject.Services.csproj", "{A4CC1E45-4DCB-41CC-BC98-DFAB86B8E097}"
 EndProject

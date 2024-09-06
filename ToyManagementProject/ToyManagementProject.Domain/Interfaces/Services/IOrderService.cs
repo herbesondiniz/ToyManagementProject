@@ -1,9 +1,14 @@
-﻿using ToyManagementProject.Domain.Entities;
+﻿using ToyManagementProject.Domain.DTOs;
+using ToyManagementProject.Domain.Entities;
 
 namespace ToyManagementProject.Domain.Interfaces.Services
 {
-	public interface IOrderService : IServiceBase<Order>
-	{
-		Task<bool> ProcessOrderAsync(Order order);
+	public interface IOrderService 
+	{	
+		Task<Result<OrderDTO>> AddAsync(OrderDTO orderDTO);
+		Task<Result<IEnumerable<OrderDTO>>> GetAllAsync();
+		Task<Order> GetByIdAsync(int id);		
+		Task UpdateAsync(Order obj);
+		Task DeleteAsync(int id);
 	}
 }

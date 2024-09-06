@@ -1,6 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Repositories;
 using ToyManagementProject.Domain.Interfaces.Services;
+using ToyManagementProject.Domain.Mappings;
+using ToyManagementProject.Domain.Validators;
+using ToyManagementProject.Domain.Validators.Interfaces;
 using ToyManagementProject.Infra.Data.Context;
 using ToyManagementProject.Infra.Data.RepoEF;
 using ToyManagementProject.Infra.Data.UoW;
@@ -32,15 +36,25 @@ builder.Services.AddDbContext<ToyDbContext>(options =>
 builder.Services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
 builder.Services.AddScoped(typeof(IServiceBase<>), typeof(ServiceBase<>));
 
-builder.Services.AddScoped<IToyRepository,ToyRepository>();
-builder.Services.AddScoped<IToyService, ToyService>();
-builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
-builder.Services.AddScoped<IOrderItemService, OrderItemService>();
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddScoped<IStockRepository, StockRepository>();
-builder.Services.AddScoped<IStockService, StockService>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+// repositories
+builder.Services.AddScoped<IToyRepository,ToyRepository>();
+builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IStockRepository, StockRepository>();
+//Application
+builder.Services.AddScoped<IToyService, ToyService>();
+builder.Services.AddScoped<IOrderItemService, OrderItemService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IStockService, StockService>();
+builder.Services.AddScoped<IOrderProcessingService, OrderProcessingService>();
+
+//validators
+builder.Services.AddScoped(typeof(IValidator<Order>), typeof(OrderValidator));
+builder.Services.AddScoped(typeof(IValidator<Toy>), typeof(ToyValidator));
+
+//AutoMapper
+builder.Services.AddAutoMapper(typeof(OrderProfile));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

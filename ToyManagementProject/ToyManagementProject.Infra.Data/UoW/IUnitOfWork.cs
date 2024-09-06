@@ -7,9 +7,10 @@ using ToyManagementProject.Domain.Interfaces.Repositories;
 
 namespace ToyManagementProject.Infra.Data.UoW
 {
-	public interface IUnitOfWork : IDisposable
-	{	
-		Task Commit();
-		Task Rollback();
+	public interface IUnitOfWork : IAsyncDisposable
+	{
+		Task BeginTransactionAsync();
+		Task CommitAsync();
+		Task RollbackAsync();
 	}
 }

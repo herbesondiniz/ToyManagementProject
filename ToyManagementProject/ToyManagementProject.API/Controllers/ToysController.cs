@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ToyManagementProject.Domain;
+using ToyManagementProject.Domain.DTOs;
 using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Services;
 using ToyManagementProject.Infra.Data.UoW;
@@ -36,44 +38,33 @@ namespace ToyManagementProject.API.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> Create(Toy toy)
+		public async Task<ActionResult> Create(ToyDTO toyDTO)
 		{
-			try
-			{
-				_toyService.AddAsync(toy);
-				
-				await _uow.Commit();
-			}
-			catch (Exception)
-			{
-
-				await _uow.Rollback();
-			}
+			var result = await _toyService.AddAsync(toyDTO);
 			
-			return CreatedAtAction(nameof(GetById), new { id = toy.Id }, toy);
+			if (!result.IsSuccess) 
+			{
+				return UnprocessableEntity(result.Errors);
+			}
+
+			return CreatedAtAction(nameof(GetById), new { id = result.Data.Id }, result.Data);
 		}
 
 		[HttpPut("{id}")]
-		public async Task<ActionResult> Update(int id, Toy toy)
-		{
+		public async Task<ActionResult> Update(int id, ToyDTO toy)
+		{			
 			if (id != toy.Id)
 			{
 				return BadRequest();
 			}
+			var result = await _toyService.UpdateAsync(toy);
 
-			try
+			if (!result.IsSuccess) 
 			{
-				await _toyService.UpdateAsync(toy);
-
-				await _uow.Commit();
+				return UnprocessableEntity(result.Errors);
 			}
-			catch (Exception)
-			{
 
-				await _uow.Rollback();
-			}
-			
-			return NoContent();
+			return CreatedAtAction(nameof(GetById), new { id = result.Data.Id }, result.Data);
 		}
 
 		[HttpDelete("{id}")]
@@ -89,14 +80,14 @@ namespace ToyManagementProject.API.Controllers
 			{
 				await _toyService.DeleteAsync(id);
 				
-				await _uow.Commit();
+				await _uow.CommitAsync();
 			}
 			catch (Exception)
 			{
 
-				await _uow.Rollback();
+				await _uow.RollbackAsync();
 			}
-			
+						
 			return NoContent();
 		}
 	}

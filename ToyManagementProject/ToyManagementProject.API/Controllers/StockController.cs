@@ -51,11 +51,11 @@ namespace StockManagementProject.API.Controllers
 			{
 				await _stockService.AddAsync(stock);
 				
-				await _uow.Commit();
+				await _uow.CommitAsync();
 			}
 			catch (Exception)
 			{
-				await _uow.Rollback();
+				await _uow.RollbackAsync();
 			}
 			
 			return CreatedAtAction(nameof(GetById), new { id = stock.Id }, stock);
@@ -78,11 +78,11 @@ namespace StockManagementProject.API.Controllers
 			{
 				await _stockService.UpdateAsync(stock);
 
-				await _uow.Commit();
+				await _uow.CommitAsync();
 			}
 			catch (Exception)
 			{
-				await _uow.Rollback();
+				await _uow.RollbackAsync();
 			}
 		
 			return NoContent();
@@ -101,11 +101,11 @@ namespace StockManagementProject.API.Controllers
 			{
 				await _stockService.DeleteAsync(id);
 				
-				await _uow.Commit();
+				await _uow.CommitAsync();
 			}
 			catch (Exception)
 			{
-				await _uow.Rollback();			
+				await _uow.RollbackAsync();			
 			}
 			
 			return NoContent();

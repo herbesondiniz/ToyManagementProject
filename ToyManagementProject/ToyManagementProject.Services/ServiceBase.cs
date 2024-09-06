@@ -1,5 +1,4 @@
-﻿using ToyManagementProject.Domain.Entities;
-using ToyManagementProject.Domain.Interfaces.Repositories;
+﻿using ToyManagementProject.Domain.Interfaces.Repositories;
 using ToyManagementProject.Domain.Interfaces.Services;
 
 namespace ToyManagementProject.Services
@@ -13,7 +12,7 @@ namespace ToyManagementProject.Services
 		}
 		public async Task AddAsync(TEntity obj)
 		{
-			await _repositorybase.AddAsync(obj);
+			await _repositorybase.AddAsync(obj);			
 		}
 		public async Task DeleteAsync(int id)
 		{
@@ -30,6 +29,7 @@ namespace ToyManagementProject.Services
 		public async Task UpdateAsync(TEntity obj)
 		{
 			await _repositorybase.UpdateAsync(obj);
-		}	
+		}
+
 	}
 }

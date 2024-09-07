@@ -1,3 +1,10 @@
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\ToyManagementProject.API.csproj.AssemblyReference.cache
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\ToyManagementProject.API.GeneratedMSBuildEditorConfig.editorconfig
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\ToyManagementProject.API.AssemblyInfoInputs.cache
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\ToyManagementProject.API.AssemblyInfo.cs
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\ToyManagementProject.API.csproj.CoreCompileInputs.cache
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\ToyManagementProject.API.MvcApplicationPartsAssemblyInfo.cache
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\ToyManagementProject.API.sourcelink.json
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\bin\Debug\net8.0\appsettings.Development.json
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\bin\Debug\net8.0\appsettings.json
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\bin\Debug\net8.0\ToyManagementProject.API.exe
@@ -19,14 +26,7 @@ C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\bin
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\bin\Debug\net8.0\ToyManagementProject.Domain.pdb
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\bin\Debug\net8.0\ToyManagementProject.Infra.Data.pdb
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\bin\Debug\net8.0\ToyManagementProject.Services.pdb
-C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\ToyManagementProject.API.csproj.AssemblyReference.cache
-C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\ToyManagementProject.API.GeneratedMSBuildEditorConfig.editorconfig
-C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\ToyManagementProject.API.AssemblyInfoInputs.cache
-C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\ToyManagementProject.API.AssemblyInfo.cs
-C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\ToyManagementProject.API.csproj.CoreCompileInputs.cache
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\ToyManagementProject.API.MvcApplicationPartsAssemblyInfo.cs
-C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\ToyManagementProject.API.MvcApplicationPartsAssemblyInfo.cache
-C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\ToyManagementProject.API.sourcelink.json
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\staticwebassets.build.json
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\staticwebassets.development.json
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.API\obj\Debug\net8.0\staticwebassets\msbuild.ToyManagementProject.API.Microsoft.AspNetCore.StaticWebAssets.props

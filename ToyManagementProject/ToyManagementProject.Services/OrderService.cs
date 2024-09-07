@@ -13,24 +13,25 @@ namespace ToyManagementProject.Services
 	{		
 		private readonly IServiceBase<Order> _serviceBase;
 		private readonly IOrderItemService _orderItemService;
-		private readonly IUnitOfWork _uow;
-		private readonly IValidator<Order> _orderValidator;
-		private readonly IMapper _mapper;
 		private readonly IOrderProcessingService _orderProcessingService;
+		private readonly IValidator<Order> _orderValidator;
+		private readonly IUnitOfWork _uow;
+		private readonly IMapper _mapper;
+
 		public OrderService(IServiceBase<Order> serviceBase,
-							IOrderItemService orderItemService,												
-							IUnitOfWork uow,
+							IOrderItemService orderItemService,
+							IOrderProcessingService orderProcessingService,
 							IValidator<Order> orderValidator,
-							IMapper mapper,
-							IOrderProcessingService orderProcessingService
+							IUnitOfWork uow,							
+							IMapper mapper							
 							)
 		{
 			_serviceBase = serviceBase;
-			_orderItemService = orderItemService;					
-			_uow = uow;
-			_orderValidator = orderValidator;
-			_mapper = mapper;
+			_orderItemService = orderItemService;
 			_orderProcessingService = orderProcessingService;
+			_orderValidator = orderValidator;
+			_uow = uow;			
+			_mapper = mapper;			
 		}
 		public async Task<Result<OrderDTO>> AddAsync(OrderDTO orderDTO)
 		{		
@@ -45,10 +46,10 @@ namespace ToyManagementProject.Services
 				return Result<OrderDTO>.Failure(order.ErrorsNotifications);
 			
 			//validação por classe externa
-			var validateErrors = _orderValidator.Validate(order);
+			//var validateErrors = _orderValidator.Validate(order);
 
-			if (validateErrors.Any())
-				return Result<OrderDTO>.Failure(validateErrors);
+			//if (validateErrors.Any())
+			//	return Result<OrderDTO>.Failure(validateErrors);
 
 			var processResult = await _orderProcessingService.ProcessOrderAsync(order);
 

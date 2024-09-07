@@ -2,8 +2,13 @@
 
 namespace ToyManagementProject.Domain.Interfaces.Repositories
 {
-	public interface IStockRepository: IRepositoryBase<Stock>
+	public interface IStockRepository
 	{
-		Task<Stock> GetStockByToyIdAsync(int toyId);		
+		Task<Stock> GetStockByToyIdAsync(int toyId);
+		Task<List<Stock>> GetAllAsync();
+		Task<Stock> GetByIdAsync(int id);
+		Task AddAsync(Stock obj);
+		Task UpdateAsync(Stock obj);
+		Task DeleteAsync(int id);
 	}
 }

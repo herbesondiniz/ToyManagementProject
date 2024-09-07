@@ -1,5 +1,4 @@
 ﻿using ToyManagementProject.Domain.Entities;
-using ToyManagementProject.Domain.Interfaces.Repositories;
 using ToyManagementProject.Domain.Interfaces.Services;
 
 namespace ToyManagementProject.Services

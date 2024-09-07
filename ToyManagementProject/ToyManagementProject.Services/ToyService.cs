@@ -50,9 +50,29 @@ namespace ToyManagementProject.Services
 			}		
 		}
 
-		public async Task DeleteAsync(int id)
+		public async Task<Result<ToyDTO>> DeleteAsync(int id)
 		{
-			await _serviceBase.DeleteAsync(id);
+			try
+			{
+				var toy = _serviceBase.GetByIdAsync(id);
+				
+				if (toy == null) 
+				{
+					return Result<ToyDTO>.Failure($"Toy doesn´t exists");
+				}
+
+				await _serviceBase.DeleteAsync(id);
+				
+				await _uow.CommitAsync();
+
+				var toyDTO = _mapper.Map<ToyDTO>(toy);
+
+				return Result<ToyDTO>.Success(toyDTO);
+			}
+			catch (Exception ex)
+			{
+				return Result<ToyDTO>.Failure(new List<string> { $"Error Delete: {ex.Message}" });
+			}
 		}
 	
 		public async Task<Toy> GetByIdAsync(int id)

@@ -1,8 +1,11 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace ToyManagementProject.Domain.Entities
 {
 	public class Order
 	{
+		[Key]
 		public int Id { get; private set; }
 		public int ClientId { get; private set; }
 		public IEnumerable<OrderItem> Items { get; private set; }		

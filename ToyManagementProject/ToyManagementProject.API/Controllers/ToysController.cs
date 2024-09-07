@@ -70,25 +70,14 @@ namespace ToyManagementProject.API.Controllers
 		[HttpDelete("{id}")]
 		public async Task<ActionResult> Delete(int id)
 		{
-			var toy = await _toyService.GetByIdAsync(id);
-			if (toy == null)
+			var result = await _toyService.DeleteAsync(id);
+			
+			if (!result.IsSuccess)
 			{
-				return NotFound();
+				return UnprocessableEntity(result.Errors);
 			}
 
-			try
-			{
-				await _toyService.DeleteAsync(id);
-				
-				await _uow.CommitAsync();
-			}
-			catch (Exception)
-			{
-
-				await _uow.RollbackAsync();
-			}
-						
-			return NoContent();
+			return Ok(result.Data);
 		}
 	}
 }

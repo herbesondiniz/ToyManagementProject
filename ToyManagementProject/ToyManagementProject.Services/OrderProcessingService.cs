@@ -23,11 +23,11 @@ namespace ToyManagementProject.Services
 				{
 					var toy = await _toyService.GetByIdAsync(orderItem.ToyId);
 					if (toy == null)
-						return Result<object>.Failure(new List<string> { $"Orders list is empty" });										
+						return Result<object>.Failure($"Toy doesn´t exists");										
 
 					var stock = await _stockService.GetStockByToyIdAsync(orderItem.ToyId);
 					if (stock?.Quantity <= 0)
-						return Result<object>.Failure(new List<string> { $"Stock is not registered" });					
+						return Result<object>.Failure($"Orders list is empty");					
 
 					orderItem.Price = toy.Price;
 					orderItem.OrderId = order.Id;
@@ -35,14 +35,14 @@ namespace ToyManagementProject.Services
 				}
 				if (order.TotalAmount <= 0)
 				{
-					return Result<object>.Failure(new List<string> { $"Total amount can not be zero" });					
+					return Result<object>.Failure($"Orders list is empty");					
 				}				
 
 				return Result<object>.Success(null, "Order created");
 			}
 			catch (Exception ex)
 			{
-				return Result<object>.Failure(new List<string> { $"An error occurred while processing the order: {ex.Message} " });
+				return Result<object>.Failure($"An error occurred while processing the order: {ex.Message} ");
 			}					
 		}
 	}

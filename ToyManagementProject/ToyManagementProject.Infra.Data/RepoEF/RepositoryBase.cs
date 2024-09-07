@@ -23,7 +23,7 @@ namespace ToyManagementProject.Infra.Data.RepoEF
 			if (obj != null)
 			{
 				_context.Set<TEntity>().Remove(obj);				
-			}
+			}		
 		}
 		public async Task<List<TEntity>> GetAllAsync()
 		{

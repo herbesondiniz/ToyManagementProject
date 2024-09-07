@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ToyManagementProject.Infra.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+36b96029d2a0bbe16ccd4f3262ac1c6a6f7be9b5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4852f323e53695d6fee74816dedfcbd643f6fbe6")]
 [assembly: System.Reflection.AssemblyProductAttribute("ToyManagementProject.Infra.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ToyManagementProject.Infra.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

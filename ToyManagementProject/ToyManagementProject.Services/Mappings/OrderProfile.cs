@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using ToyManagementProject.Domain.DTOs;
 using ToyManagementProject.Domain.Entities;
+using ToyManagementProject.Services.Dtos;
 
 namespace ToyManagementProject.Services.Mappings
 {
@@ -8,10 +8,10 @@ namespace ToyManagementProject.Services.Mappings
 	{
 		public OrderProfile()
 		{
-			CreateMap<Order, OrderDTO>();
-			CreateMap<OrderDTO, Order>();
-			CreateMap<OrderItem, OrderItemDTO>();
-			CreateMap<OrderItemDTO, OrderItem>();
+			CreateMap<Order, OrderDto>();
+			CreateMap<OrderDto, Order>();
+			CreateMap<OrderItem, OrderItemDto>();
+			CreateMap<OrderItemDto, OrderItem>();
 		}
 	}
 }

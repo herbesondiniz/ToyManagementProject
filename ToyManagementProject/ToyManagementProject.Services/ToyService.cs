@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ToyManagementProject.Domain;
-using ToyManagementProject.Domain.DTOs;
+using ToyManagementProject.Services.Dtos;
 using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Services;
 using ToyManagementProject.Infra.Data.UoW;
@@ -21,36 +21,32 @@ namespace ToyManagementProject.Services
 			_mapper = mapper;
 			_toyValidator = toyValidator;
 		}
-		public async Task<Result<ToyDTO>> AddAsync(ToyDTO toyDTO)
+		public async Task<Result<ToyDto>> AddAsync(Toy toy)
 		{
-			var toy = new Toy(toyDTO.Name, toyDTO.Description, toyDTO.Price);
-
 			try
 			{
 				if (toy.ErrorsNotifications.Any()) 
 				{
-					return Result<ToyDTO>.Failure(toy.ErrorsNotifications);
+					return Result<ToyDto>.Failure(toy.ErrorsNotifications);
 				}
 
 				var validateErrors = _toyValidator.Validate(toy);
 
 				if (validateErrors.Any())
-					return Result<ToyDTO>.Failure(validateErrors);
+					return Result<ToyDto>.Failure(validateErrors);
 											
 				await _serviceBase.AddAsync(toy);
 				await _uow.CommitAsync();
 
-				toyDTO = _mapper.Map<ToyDTO>(toy);
-
-				return Result<ToyDTO>.Success(toyDTO);
+				return Result<ToyDto>.Success(_mapper.Map<ToyDto>(toy));
 			}
 			catch (Exception ex)
 			{
-				return Result<ToyDTO>.Failure(new List<string> { $"Error AddAsync: {ex.Message}" });
+				return Result<ToyDto>.Failure(new List<string> { $"Error AddAsync: {ex.Message}" });
 			}		
 		}
 
-		public async Task<Result<ToyDTO>> DeleteAsync(int id)
+		public async Task<Result<ToyDto>> DeleteAsync(int id)
 		{
 			try
 			{
@@ -58,37 +54,38 @@ namespace ToyManagementProject.Services
 				
 				if (toy == null) 
 				{
-					return Result<ToyDTO>.Failure($"Toy doesn´t exists");
+					return Result<ToyDto>.Failure($"Toy doesn´t exists");
 				}
 
 				await _serviceBase.DeleteAsync(id);
 				
 				await _uow.CommitAsync();
 
-				var toyDTO = _mapper.Map<ToyDTO>(toy);
+				var toyDTO = _mapper.Map<ToyDto>(toy);
 
-				return Result<ToyDTO>.Success(toyDTO);
+				return Result<ToyDto>.Success(toyDTO);
 			}
 			catch (Exception ex)
 			{
-				return Result<ToyDTO>.Failure(new List<string> { $"Error Delete: {ex.Message}" });
+				return Result<ToyDto>.Failure(new List<string> { $"Error Delete: {ex.Message}" });
 			}
 		}
-	
-		public async Task<Toy> GetByIdAsync(int id)
-		{
-			return await _serviceBase.GetByIdAsync(id);
-		}
 
-		public async Task<Result<ToyDTO>> UpdateAsync(ToyDTO toyDTO)
+		public async Task<Result<ToyDto>> GetByIdAsync(int id)
 		{
-			var toy = new Toy("","",0);
-			
-			toy.UpdateToy(toyDTO.Id, toyDTO.Name, toyDTO.Description, toyDTO.Price);
+			var toy = await _serviceBase.GetByIdAsync(id);
+			if (toy == null)
+			{
+				return Result<ToyDto>.Failure($"");
+			}
 
+			return Result<ToyDto>.Success(_mapper.Map<ToyDto>(toy));
+		}	
+		public async Task<Result<ToyDto>> UpdateAsync(Toy toy)
+		{						
 			if (toy.ErrorsNotifications.Any())
             {
-				return Result<ToyDTO>.Failure(toy.ErrorsNotifications);
+				return Result<ToyDto>.Failure(toy.ErrorsNotifications);
 			}
 
             try
@@ -96,22 +93,27 @@ namespace ToyManagementProject.Services
 				await _serviceBase.UpdateAsync(toy);
 				await _uow.CommitAsync();
 
-				toyDTO = _mapper.Map<ToyDTO>(toy);
-
-				return Result<ToyDTO>.Success(toyDTO);
+				return Result<ToyDto>.Success(_mapper.Map<ToyDto>(toy));
 			}
 			catch (Exception ex)
 			{
-				return Result<ToyDTO>.Failure(new List<string> { $"Error UpdateAsync: {ex.Message}" });
+				return Result<ToyDto>.Failure(new List<string> { $"Error UpdateAsync: {ex.Message}" });
 				throw;
 			}
 			
 		}
 
-		public async Task<List<Toy>> GetAllAsync()
+		public async Task<Result<IEnumerable<ToyDto>>> GetAllAsync()
 		{
-			return await _serviceBase.GetAllAsync();
+			var toys = await _serviceBase.GetAllAsync();
+			if (toys == null)
+			{
+				return Result<IEnumerable<ToyDto>>.Failure($"toys is empty");
+			}
 
-		}		
+			return Result<IEnumerable<ToyDto>>.Success(_mapper.Map<IEnumerable<ToyDto>>(toys));
+
+
+		}
 	}
 }

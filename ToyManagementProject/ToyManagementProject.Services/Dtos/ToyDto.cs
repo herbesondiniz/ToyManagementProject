@@ -1,7 +1,7 @@
 ﻿
-namespace ToyManagementProject.Domain.DTOs
+namespace ToyManagementProject.Services.Dtos
 {
-	public class ToyDTO
+	public class ToyDto
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }

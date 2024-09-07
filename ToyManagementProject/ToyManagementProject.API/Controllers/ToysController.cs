@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ToyManagementProject.Domain;
-using ToyManagementProject.Domain.DTOs;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Services;
 using ToyManagementProject.Infra.Data.UoW;
+using ToyManagementProject.Services.Dtos;
 
 namespace ToyManagementProject.API.Controllers
 {
@@ -13,11 +13,13 @@ namespace ToyManagementProject.API.Controllers
 	{
 		private readonly IToyService _toyService;
 		private readonly IUnitOfWork _uow;
+		private readonly IMapper _mapper;
 
-		public ToysController(IToyService toyService, IUnitOfWork uow)
+		public ToysController(IToyService toyService, IUnitOfWork uow, IMapper mapper)
 		{
 			_toyService = toyService;
 			_uow = uow;
+			_mapper = mapper;
 		}
 		[HttpGet]
 		public async Task<ActionResult<List<Toy>>> GetAll()
@@ -38,9 +40,9 @@ namespace ToyManagementProject.API.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> Create(ToyDTO toyDTO)
+		public async Task<ActionResult> Create(ToyDto toyDTO)
 		{
-			var result = await _toyService.AddAsync(toyDTO);
+			var result = await _toyService.AddAsync(_mapper.Map<Toy>(toyDTO));
 			
 			if (!result.IsSuccess) 
 			{
@@ -51,13 +53,13 @@ namespace ToyManagementProject.API.Controllers
 		}
 
 		[HttpPut("{id}")]
-		public async Task<ActionResult> Update(int id, ToyDTO toy)
+		public async Task<ActionResult> Update(int id, ToyDto toyDto)
 		{			
-			if (id != toy.Id)
+			if (id != toyDto.Id)
 			{
 				return BadRequest();
 			}
-			var result = await _toyService.UpdateAsync(toy);
+			var result = await _toyService.UpdateAsync(_mapper.Map<Toy>(toyDto));
 
 			if (!result.IsSuccess) 
 			{

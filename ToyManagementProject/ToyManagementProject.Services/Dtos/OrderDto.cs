@@ -1,11 +1,11 @@
 ﻿
-namespace ToyManagementProject.Domain.DTOs
+namespace ToyManagementProject.Services.Dtos
 {
-	public class OrderDTO
+	public class OrderDto
 	{
 		public int Id { get; set; }
 		public int ClientId { get; set; }
-		public List<OrderItemDTO>? Items { get; set; }
+		public List<OrderItemDto>? Items { get; set; }
 		public decimal TotalAmount { get; set; }		
 	}
 }

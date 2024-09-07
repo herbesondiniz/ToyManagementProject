@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using ToyManagementProject.Domain.DTOs;
 using ToyManagementProject.Domain.Entities;
+using ToyManagementProject.Services.Dtos;
 
 namespace ToyManagementProject.Services.Mappings
 {
@@ -8,8 +8,8 @@ namespace ToyManagementProject.Services.Mappings
 	{
 		public ToyProfile()
 		{
-			CreateMap<Toy, ToyDTO>();
-			CreateMap<ToyDTO, Toy>();
+			CreateMap<Toy, ToyDto>();
+			CreateMap<ToyDto, Toy>();
 		}
 	}
 }

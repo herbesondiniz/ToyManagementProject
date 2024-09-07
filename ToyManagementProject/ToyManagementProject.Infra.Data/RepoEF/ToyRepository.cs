@@ -1,6 +1,4 @@
-﻿using ToyManagementProject.Domain;
-using ToyManagementProject.Domain.DTOs;
-using ToyManagementProject.Domain.Entities;
+﻿using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Repositories;
 
 namespace ToyManagementProject.Infra.Data.RepoEF

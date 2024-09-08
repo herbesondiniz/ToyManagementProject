@@ -1,3 +1,9 @@
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Services\obj\Debug\net8.0\ToyManagementProject.Services.csproj.AssemblyReference.cache
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Services\obj\Debug\net8.0\ToyManagementProject.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Services\obj\Debug\net8.0\ToyManagementProject.Services.AssemblyInfoInputs.cache
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Services\obj\Debug\net8.0\ToyManagementProject.Services.AssemblyInfo.cs
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Services\obj\Debug\net8.0\ToyManagementProject.Services.csproj.CoreCompileInputs.cache
+C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Services\obj\Debug\net8.0\ToyManagementProject.Services.sourcelink.json
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Services\bin\Debug\net8.0\ToyManagementProject.Services.deps.json
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Services\bin\Debug\net8.0\ToyManagementProject.Services.dll
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Services\bin\Debug\net8.0\ToyManagementProject.Services.pdb
@@ -5,12 +11,6 @@ C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Service
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Services\bin\Debug\net8.0\ToyManagementProject.Infra.Data.dll
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Services\bin\Debug\net8.0\ToyManagementProject.Domain.pdb
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Services\bin\Debug\net8.0\ToyManagementProject.Infra.Data.pdb
-C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Services\obj\Debug\net8.0\ToyManagementProject.Services.csproj.AssemblyReference.cache
-C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Services\obj\Debug\net8.0\ToyManagementProject.Services.GeneratedMSBuildEditorConfig.editorconfig
-C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Services\obj\Debug\net8.0\ToyManagementProject.Services.AssemblyInfoInputs.cache
-C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Services\obj\Debug\net8.0\ToyManagementProject.Services.AssemblyInfo.cs
-C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Services\obj\Debug\net8.0\ToyManagementProject.Services.csproj.CoreCompileInputs.cache
-C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Services\obj\Debug\net8.0\ToyManagementProject.Services.sourcelink.json
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Services\obj\Debug\net8.0\ToyManag.2817998A.Up2Date
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Services\obj\Debug\net8.0\ToyManagementProject.Services.dll
 C:\GitHub\ToyManagementProject\ToyManagementProject\ToyManagementProject.Services\obj\Debug\net8.0\refint\ToyManagementProject.Services.dll

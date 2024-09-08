@@ -23,14 +23,15 @@ namespace ToyManagementProject.Domain.Entities
 		public void DeductFromStock(int quantity) 
 		{
 			var notifications = new List<string>();
+			
 			if (quantity > Quantity) 
 			{
 				notifications.Add($"Quantity is bigger than current stock");
-			}
-			
-			ErrorsNotifications = notifications;
+			}						
 
 			Quantity -= quantity;
+
+			ErrorsNotifications = notifications;
 		}
 		public void ValidationErrors()
 		{

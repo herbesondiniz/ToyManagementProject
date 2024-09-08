@@ -8,21 +8,22 @@ namespace ToyManagementProject.Domain.Entities
 	{
 		[Key]
 		public int Id { get; private set; }
-		public int ToyId { get; private set; }
+        public int ToyId { get; private set; }
+        public Toy Toy { get; private set; }
 		public int OrderId { get; set; }
 		public int Quantity { get; private set; }
 		public decimal Price { get; set; }
 		public IList<string>? ErrorsNotifications { get; private set; }
         public OrderItem(){}
-        public OrderItem(int toyId, int orderId, int quantity, decimal price)
+        public OrderItem(Toy toy, int orderId, int quantity, decimal price)
 		{
-			ToyId = toyId;
+			Toy = toy;
 			OrderId = orderId;
 			Quantity = quantity;
 			Price = price;
 
 			ValidationErrors();
-		}
+		}		
 		public void AddPrice(decimal price)
 		{
 			var notifications = new List<string>();
@@ -36,6 +37,21 @@ namespace ToyManagementProject.Domain.Entities
 
 			Price = price;
 		}
+		public void SetToy(Toy toy)
+		{
+			var notifications = new List<string>();
+
+			if (toy == null) 
+			{
+				notifications.Add($"Toy is empty");
+			}					
+
+			Toy = toy;
+			ToyId = toy.Id;
+			Price = toy.Price;
+
+			ErrorsNotifications = notifications;
+		}
 		public void AddOrderId(int orderId)
 		{
 			var notifications = new List<string>();
@@ -43,17 +59,18 @@ namespace ToyManagementProject.Domain.Entities
 			if (orderId < 0)
 			{
 				notifications.Add($"OrderId is required");
-			}
-			ErrorsNotifications = notifications;
+			}			
 
 			OrderId = orderId;
+
+			ErrorsNotifications = notifications;
 		}		
 
 		public void ValidationErrors()
 		{
 			var notifications = new List<string>();
 
-			if (ToyId <= 0)
+			if (Toy == null || Toy.Id <= 0)
 				notifications.Add($"ToyId is required");
 
 			if (OrderId <= 0)

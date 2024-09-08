@@ -9,10 +9,12 @@ namespace ToyManagementProject.Services
 	{
 		private readonly IToyService _toyService;
 		private readonly IStockService _stockService;
+		private readonly IMapper _mapper;
 		public OrderProcessingService(IToyService toyService, IStockService stockService, IMapper mapper)
 		{
 			_toyService = toyService;
 			_stockService = stockService;
+			_mapper = mapper;
 		}
 		public async Task<Result<object>> ProcessOrderAsync(Order order)
 		{
@@ -20,30 +22,29 @@ namespace ToyManagementProject.Services
 			{
 				foreach (var orderItem in order.Items)
 				{
-					var result = await _toyService.GetByIdAsync(orderItem.ToyId);
+					orderItem.AddOrderId(order.Id);
+
+					var result = await _toyService.GetByIdAsync(orderItem.ToyId);					
 					if (!result.IsSuccess)
 					{
 						return Result<object>.Failure($"{result.Errors}");
 					}
-					var toy = result.Data;
 					
-					var stock = await _stockService.GetStockByToyIdAsync(orderItem.ToyId);
+					orderItem.SetToy(_mapper.Map<Toy>(result.Data));										
+
+					var stock = await _stockService.GetStockByToyIdAsync(orderItem.Toy.Id);
 																
 					stock.DeductFromStock(orderItem.Quantity);
 					
 					if (stock.ErrorsNotifications.Any()) 
 					{
 						return Result<object>.Failure($"{stock.ErrorsNotifications}");
-					}
-
-					orderItem.AddPrice(toy.Price);
-					orderItem.AddOrderId(order.Id);
+					}									
 
 					if (orderItem.ErrorsNotifications.Any()) 
 					{
 						return Result<object>.Failure($"{orderItem.ErrorsNotifications}");
-					}
-					
+					}					
 				}
 				if (order.TotalAmount <= 0)
 				{

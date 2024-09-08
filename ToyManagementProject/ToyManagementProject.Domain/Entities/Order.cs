@@ -48,7 +48,7 @@ namespace ToyManagementProject.Domain.Entities
 				{
 					if (item.Quantity <= 0)
 					{
-						notifications.Add($"Item with ToyId {item.ToyId} must have a quantity greater than zero.");
+						notifications.Add($"Item {item.Toy.Name} must have a quantity greater than zero.");
 					}
 				}
 			}

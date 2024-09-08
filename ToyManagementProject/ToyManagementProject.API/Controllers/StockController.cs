@@ -26,8 +26,14 @@ namespace StockManagementProject.API.Controllers
 		[HttpGet]
 		public async Task<ActionResult<List<Stock>>> GetAll()
 		{
-			var stocks = await _stockService.GetAllAsync();
-			return Ok(stocks);
+			var result = await _stockService.GetAllAsync();
+			
+			if (!result.IsSuccess) 
+			{
+				return UnprocessableEntity(result.Errors);
+			}
+
+			return Ok(result);
 		}
 
 		[HttpGet("{id}")]
@@ -51,7 +57,7 @@ namespace StockManagementProject.API.Controllers
 				return UnprocessableEntity(result.Errors);
 			}
 
-			return CreatedAtAction(nameof(GetById), new { id = dto.Id }, dto);
+			return CreatedAtAction(nameof(GetById), new { id = dto.Id }, result);
 		}
 
 		[HttpPut("{id}")]

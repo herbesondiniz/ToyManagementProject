@@ -1,10 +1,12 @@
 ﻿
 using AutoMapper;
+using System.Collections.Generic;
 using ToyManagementProject.Domain;
 using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Repositories;
 using ToyManagementProject.Domain.Interfaces.Services;
 using ToyManagementProject.Infra.Data.UoW;
+using ToyManagementProject.Services.Dtos;
 
 namespace ToyManagementProject.Services
 {
@@ -26,21 +28,21 @@ namespace ToyManagementProject.Services
 			_uow = uow;
 			_toyService = toyService;
 			_mapper = mapper;
-		}
-		public async Task<Result<Stock>> AddAsync(Stock stock)
+		}		
+		public async Task<Result<StockDto>> AddAsync(Stock stock)
 		{
 			var result = await _toyService.GetByIdAsync(stock.ToyId);
 			
 			if (!result.IsSuccess) 
 			{
-				return Result<Stock>.Failure(result.Errors);
+				return Result<StockDto>.Failure(result.Errors);
 			}		
 
 			try
 			{
 				if (!stock.IsValid())
 				{
-					return Result<Stock>.Failure(stock.ErrorsNotifications);
+					return Result<StockDto>.Failure(stock.ErrorsNotifications);
 				}
 
 				await _repository.AddAsync(stock);
@@ -49,11 +51,11 @@ namespace ToyManagementProject.Services
 				
 				stock.SetToy(_mapper.Map<Toy>(result.Data));
 
-				return Result<Stock>.Success(stock);
+				return Result<StockDto>.Success(_mapper.Map<StockDto>(stock));
 			}
 			catch (Exception ex)
 			{
-				return Result<Stock>.Failure($"Error AddAsync: {ex.Message}");
+				return Result<StockDto>.Failure($"Error AddAsync: {ex.Message}");
 			}
 		}
 
@@ -61,9 +63,16 @@ namespace ToyManagementProject.Services
 		{
 			await _repository.DeleteAsync(id);	
 		}
-		public async Task<List<Stock>> GetAllAsync()
+		public async Task<Result<IList<StockDto>>> GetAllAsync()
 		{
-			return await _repository.GetAllAsync();
+			var stocks = await _repository.GetAllAsync();
+			
+			if(stocks == null) 
+			{
+				return Result<IList<StockDto>>.Failure($"stocks list is empty");
+			}
+
+			return Result<IList<StockDto>>.Success(_mapper.Map<IList<StockDto>>(stocks));
 		}
 
 		public async Task<Stock> GetByIdAsync(int id)
@@ -79,6 +88,6 @@ namespace ToyManagementProject.Services
 		public async Task UpdateAsync(Stock obj)
 		{
 			await (_repository.UpdateAsync(obj));	
-		}
+		}		
 	}
 }

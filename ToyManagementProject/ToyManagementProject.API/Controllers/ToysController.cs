@@ -24,19 +24,25 @@ namespace ToyManagementProject.API.Controllers
 		[HttpGet]
 		public async Task<ActionResult<List<ToyDto>>> GetAll()
 		{
-			var toysDto = await _toyService.GetAllAsync();
-			return Ok(toysDto);
+			var result = await _toyService.GetAllAsync();
+			if (!result.IsSuccess) 
+			{
+				UnprocessableEntity(result.Errors);
+			}
+			
+			return Ok(result);
 		}
 
 		[HttpGet("{id}")]
 		public async Task<ActionResult<Toy>> GetById(int id)
 		{
-			var toy = await _toyService.GetByIdAsync(id);
-			if (toy == null)
+			var result = await _toyService.GetByIdAsync(id);
+			if (!result.IsSuccess)
 			{
-				return NotFound();
+				return UnprocessableEntity(result.Errors);
 			}
-			return Ok(toy);
+
+			return Ok(result);
 		}
 
 		[HttpPost]
@@ -49,7 +55,7 @@ namespace ToyManagementProject.API.Controllers
 				return UnprocessableEntity(result.Errors);
 			}
 
-			return CreatedAtAction(nameof(GetById), new { id = result.Data.Id }, result.Data);
+			return CreatedAtAction(nameof(GetById), new { id = result.Data.Id }, result);
 		}
 
 		[HttpPut("{id}")]
@@ -66,7 +72,7 @@ namespace ToyManagementProject.API.Controllers
 				return UnprocessableEntity(result.Errors);
 			}
 
-			return CreatedAtAction(nameof(GetById), new { id = result.Data.Id }, result.Data);
+			return CreatedAtAction(nameof(GetById), new { id = result.Data.Id }, result);
 		}
 
 		[HttpDelete("{id}")]

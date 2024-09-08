@@ -14,7 +14,6 @@ namespace ToyManagementProject.Domain.Entities
 		
 		private readonly List<string> _errorsNotifications = new List<string>();
 		public IReadOnlyList<string> ErrorsNotifications => _errorsNotifications.AsReadOnly();
-
 		public Toy(string name, string description, decimal price)
 		{
 			SetName(name);

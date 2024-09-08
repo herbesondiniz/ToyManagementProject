@@ -44,26 +44,13 @@ namespace StockManagementProject.API.Controllers
 		[HttpPost]
 		public async Task<ActionResult> Create(StockDto dto)
 		{
-			var stock = await _stockService.GetStockByToyIdAsync(dto.ToyId);
+			var result = await _stockService.AddAsync(_mapper.Map<Stock>(dto));
 
-			if (stock != null) 
+			if (!result.IsSuccess)
 			{
-				return UnprocessableEntity("The toy already was created, retry update it.");
+				return UnprocessableEntity(result.Errors);
 			}
-						
-			if (dto.Quantity <= 0)
-				return NotFound("Quantity is not filled");
-			try
-			{
-				await _stockService.AddAsync(_mapper.Map<Stock>(dto));
-				
-				await _uow.CommitAsync();
-			}
-			catch (Exception)
-			{
-				await _uow.RollbackAsync();
-			}
-			
+
 			return CreatedAtAction(nameof(GetById), new { id = dto.Id }, dto);
 		}
 

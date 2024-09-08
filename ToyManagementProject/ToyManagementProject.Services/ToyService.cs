@@ -76,7 +76,7 @@ namespace ToyManagementProject.Services
 			var toy = await _serviceBase.GetByIdAsync(id);
 			if (toy == null)
 			{
-				return Result<ToyDto>.Failure($"");
+				return Result<ToyDto>.Failure($"Toy is not registered.");
 			}
 
 			return Result<ToyDto>.Success(_mapper.Map<ToyDto>(toy));

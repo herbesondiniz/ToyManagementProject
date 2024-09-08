@@ -10,42 +10,65 @@ namespace ToyManagementProject.Domain.Entities
 		[Key]
 		public int Id { get; private set; }
 		public int ToyId { get; private set; }
+		public Toy Toy { get; private set; }
 		public int Quantity { get; private set; }
-		public IList<string>? ErrorsNotifications { get; private set; }
-		public Stock(){}
+		
+		private readonly List<string> _errorsNotifications = new List<string>();
+		public IReadOnlyList<string> ErrorsNotifications => _errorsNotifications.AsReadOnly();		
         public Stock(int toyId, int quantity)
         {
-			ToyId = toyId;
-			Quantity = quantity;
-
-			ValidationErrors();
+			SetToyId(toyId);
+			SetQuantity(quantity);			
         }
+		public void SetToyId(int toyId) 
+		{
+			if(toyId <= 0) 
+			{
+				_errorsNotifications.Add("toyId is required");
+				return;
+			}
+
+			ToyId = toyId;
+		}
+		public void SetToy(Toy toy)
+		{
+			if(toy == null) 
+			{
+				_errorsNotifications.Add("Toy is empty");
+				return;
+			}
+
+			Toy = toy;
+		}
+		public void SetQuantity(int quantity)
+		{
+			if (quantity <= 0)
+			{
+				_errorsNotifications.Add("quantity is required");
+				return;
+			}
+
+			Quantity = quantity;
+		}
 		public void DeductFromStock(int quantity) 
 		{
-			var notifications = new List<string>();
-			
+			if (quantity <= 0)
+			{
+				_errorsNotifications.Add($"Quantity is bigger than current stock");
+				return;
+			}
+
 			if (quantity > Quantity) 
 			{
-				notifications.Add($"Quantity is bigger than current stock");
+				_errorsNotifications.Add($"Quantity is bigger than current stock");
+				return;
 			}						
 
-			Quantity -= quantity;
-
-			ErrorsNotifications = notifications;
+			Quantity -= quantity;			
 		}
-		public void ValidationErrors()
+		public bool IsValid() 
 		{
-			var notifications = new List<string>();
-
-			if (ToyId <= 0)
-				notifications.Add($"ToyId is required");
-			
-
-			if (Quantity <= 0)
-				notifications.Add($"Quantity is required");
-			
-			ErrorsNotifications = notifications;
+			return !_errorsNotifications.Any();
 		}
-
 	}
 }

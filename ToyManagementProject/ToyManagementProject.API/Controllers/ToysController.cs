@@ -22,10 +22,10 @@ namespace ToyManagementProject.API.Controllers
 			_mapper = mapper;
 		}
 		[HttpGet]
-		public async Task<ActionResult<List<Toy>>> GetAll()
+		public async Task<ActionResult<List<ToyDto>>> GetAll()
 		{
-			var toys = await _toyService.GetAllAsync();
-			return Ok(toys);
+			var toysDto = await _toyService.GetAllAsync();
+			return Ok(toysDto);
 		}
 
 		[HttpGet("{id}")]

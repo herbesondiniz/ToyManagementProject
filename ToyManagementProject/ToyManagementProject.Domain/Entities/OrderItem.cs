@@ -12,7 +12,7 @@ namespace ToyManagementProject.Domain.Entities
 		public int OrderId { get; set; }
 		public int Quantity { get; private set; }
 		public decimal Price { get; set; }
-		public IList<string>? ErrorsNotifications { get; private set; }
+		public IList<string>? ErrorsNotifications { get; private set; }	
 
 		public OrderItem(int toyId, int orderId, int quantity, decimal price)
 		{
@@ -25,10 +25,27 @@ namespace ToyManagementProject.Domain.Entities
 		}
 		public void AddPrice(decimal price)
 		{
+			var notifications = new List<string>();
+
+			if(price < 0) 
+			{
+				notifications.Add($"Price is required");				
+			}
+
+			ErrorsNotifications = notifications;
+
 			Price = price;
 		}
 		public void AddOrderId(int orderId)
 		{
+			var notifications = new List<string>();
+
+			if (orderId < 0)
+			{
+				notifications.Add($"OrderId is required");
+			}
+			ErrorsNotifications = notifications;
+
 			OrderId = orderId;
 		}		
 

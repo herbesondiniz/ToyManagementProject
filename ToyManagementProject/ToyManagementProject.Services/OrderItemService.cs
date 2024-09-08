@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using System.Collections.Generic;
 using ToyManagementProject.Domain;
 using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Services;

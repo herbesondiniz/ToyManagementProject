@@ -10,6 +10,5 @@ namespace ToyManagementProject.Domain.Entities
 		public int ToyId { get; set; }
 		public int Quantity { get; set; }
 
-
 	}
 }

@@ -22,11 +22,11 @@ namespace ToyManagementProject.Domain.Entities
 			ValidationErrors();
 		}
 		public void UpdateToy(int id, string name, string description, decimal price)
-		{
+		{			
 			Id = id;
 			Name = name;
 			Description = description;
-			Price = price;		
+			Price = price;
 
 			ValidationErrors();
 		}

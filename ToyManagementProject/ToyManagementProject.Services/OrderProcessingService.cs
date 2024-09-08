@@ -27,8 +27,7 @@ namespace ToyManagementProject.Services
 					}
 					var toy = result.Data;
 
-
-						var stock = await _stockService.GetStockByToyIdAsync(orderItem.ToyId);
+					var stock = await _stockService.GetStockByToyIdAsync(orderItem.ToyId);
 					if (stock?.Quantity <= 0)
 						return Result<object>.Failure($"Orders list is empty");
 

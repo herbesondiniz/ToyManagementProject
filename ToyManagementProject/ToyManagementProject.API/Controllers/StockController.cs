@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Services;
 using ToyManagementProject.Infra.Data.UoW;
+using ToyManagementProject.Services.Dtos;
 
 namespace StockManagementProject.API.Controllers
 {
@@ -12,12 +14,14 @@ namespace StockManagementProject.API.Controllers
 		private readonly IStockService _stockService;
 		private readonly IToyService _toyService;
 		private readonly IUnitOfWork _uow;
+		private readonly IMapper _mapper;
 
-		public StockController(IStockService StockService, IToyService toyService, IUnitOfWork uow)
+		public StockController(IStockService StockService, IToyService toyService, IUnitOfWork uow, IMapper mapper)
 		{
 			_stockService = StockService;
 			_toyService = toyService;
 			_uow = uow;
+			_mapper = mapper;
 		}
 		[HttpGet]
 		public async Task<ActionResult<List<Stock>>> GetAll()
@@ -38,18 +42,20 @@ namespace StockManagementProject.API.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> Create(Stock stock)
+		public async Task<ActionResult> Create(StockDto dto)
 		{
-			var toy = _toyService.GetByIdAsync(stock.ToyId);
-			
-			if(toy == null)
-				return NotFound("This toy is not registered. Please, you need to register it before.");
+			var stock = await _stockService.GetStockByToyIdAsync(dto.ToyId);
 
-			if (stock.Quantity <= 0)
+			if (stock != null) 
+			{
+				return UnprocessableEntity("The toy already was created, retry update it.");
+			}
+						
+			if (dto.Quantity <= 0)
 				return NotFound("Quantity is not filled");
 			try
 			{
-				await _stockService.AddAsync(stock);
+				await _stockService.AddAsync(_mapper.Map<Stock>(dto));
 				
 				await _uow.CommitAsync();
 			}
@@ -58,7 +64,7 @@ namespace StockManagementProject.API.Controllers
 				await _uow.RollbackAsync();
 			}
 			
-			return CreatedAtAction(nameof(GetById), new { id = stock.Id }, stock);
+			return CreatedAtAction(nameof(GetById), new { id = dto.Id }, dto);
 		}
 
 		[HttpPut("{id}")]

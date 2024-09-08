@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ToyManagementProject.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+466e9b30af3e1bf37633b279018fc27ca6c896f8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+74e983fb69e9ca703fbf47e246bb2de8ac0f2db0")]
 [assembly: System.Reflection.AssemblyProductAttribute("ToyManagementProject.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ToyManagementProject.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

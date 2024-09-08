@@ -53,7 +53,8 @@ namespace ToyManagementProject.API.Controllers
 		[HttpPost]
 		public async Task<ActionResult> Create(OrderDto orderDTO)
 		{
-			var result = await _toyService.AddAsync(_mapper.Map<Toy>(orderDTO));
+			var order = _mapper.Map<Order>(orderDTO);
+			var result = await _orderService.AddAsync(order);
 
 			if (!result.IsSuccess)
 			{

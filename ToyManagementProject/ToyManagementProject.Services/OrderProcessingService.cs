@@ -23,17 +23,27 @@ namespace ToyManagementProject.Services
 					var result = await _toyService.GetByIdAsync(orderItem.ToyId);
 					if (!result.IsSuccess)
 					{
-						return Result<object>.Failure($"Toy doesn´t exists");
+						return Result<object>.Failure($"{result.Errors}");
 					}
 					var toy = result.Data;
-
+					
 					var stock = await _stockService.GetStockByToyIdAsync(orderItem.ToyId);
-					if (stock?.Quantity <= 0)
-						return Result<object>.Failure($"Orders list is empty");
+																
+					stock.DeductFromStock(orderItem.Quantity);
+					
+					if (stock.ErrorsNotifications.Any()) 
+					{
+						return Result<object>.Failure($"{stock.ErrorsNotifications}");
+					}
 
 					orderItem.AddPrice(toy.Price);
 					orderItem.AddOrderId(order.Id);
-					stock.Quantity -= orderItem.Quantity;
+
+					if (orderItem.ErrorsNotifications.Any()) 
+					{
+						return Result<object>.Failure($"{orderItem.ErrorsNotifications}");
+					}
+					
 				}
 				if (order.TotalAmount <= 0)
 				{

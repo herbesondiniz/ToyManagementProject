@@ -12,9 +12,9 @@ namespace ToyManagementProject.Domain.Entities
 		public int OrderId { get; set; }
 		public int Quantity { get; private set; }
 		public decimal Price { get; set; }
-		public IList<string>? ErrorsNotifications { get; private set; }	
-
-		public OrderItem(int toyId, int orderId, int quantity, decimal price)
+		public IList<string>? ErrorsNotifications { get; private set; }
+        public OrderItem(){}
+        public OrderItem(int toyId, int orderId, int quantity, decimal price)
 		{
 			ToyId = toyId;
 			OrderId = orderId;

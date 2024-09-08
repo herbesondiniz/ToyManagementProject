@@ -10,40 +10,66 @@ namespace ToyManagementProject.Domain.Entities
 		public int Id { get; private set; }
 		public string Name { get; private set; }
 		public string Description { get; private set; }
-		public decimal Price { get; private set; }			
-		public IList<string>? ErrorsNotifications { get; private set; }       
+		public decimal Price { get; private set; }
+		
+		private readonly List<string> _errorsNotifications = new List<string>();
+		public IReadOnlyList<string> ErrorsNotifications => _errorsNotifications.AsReadOnly();
 
 		public Toy(string name, string description, decimal price)
 		{
-			Name = name;
-			Description = description;
-			Price = price;			
+			SetName(name);
+			SetDescription(description);
+			SetPrice(price);						
+		}
+		public void SetId(int id)
+		{
+			if (id <= 0)
+			{
+				_errorsNotifications.Add($"Id is required");
+				return;
+			}
 
-			ValidationErrors();
+			Id = id;
+		}
+		public void SetName(string name) 
+		{
+			if (string.IsNullOrWhiteSpace(name)) 
+			{
+				_errorsNotifications.Add($"Name is required");
+				return;
+			}
+
+			Name = name;				
+		}
+		public void SetDescription(string description)
+		{
+			if (string.IsNullOrWhiteSpace(description))
+			{
+				_errorsNotifications.Add($"Description is required");
+				return;
+			}
+
+			Description = description;
+		}
+		public void SetPrice(decimal price)
+		{
+			if(price <= 0) 
+			{
+				_errorsNotifications.Add($"Price must be greater than zero");
+			}
+
+			Price = price;
 		}
 		public void UpdateToy(int id, string name, string description, decimal price)
 		{			
-			Id = id;
-			Name = name;
-			Description = description;
-			Price = price;
-
-			ValidationErrors();
+			SetId(id);
+			SetName(name);
+			SetDescription(description);
+			SetPrice(price);			
 		}
-		public void ValidationErrors() 
+		public bool IsValid() 
 		{
-			var notifications = new List<string>();
-
-			if (string.IsNullOrWhiteSpace(Name))
-				notifications.Add($"Name is required");
-
-			if (string.IsNullOrWhiteSpace(Description))
-				notifications.Add($"Description is required");
-
-			if (Price <= 0)
-				notifications.Add($"Price is required");
-
-			ErrorsNotifications = notifications;
+			return !_errorsNotifications.Any();
 		}
 	}
 }

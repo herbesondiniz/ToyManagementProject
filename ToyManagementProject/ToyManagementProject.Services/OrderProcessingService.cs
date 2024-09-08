@@ -22,7 +22,7 @@ namespace ToyManagementProject.Services
 			{
 				foreach (var orderItem in order.Items)
 				{
-					orderItem.AddOrderId(order.Id);
+					orderItem.SetOrderId(order.Id);
 
 					var result = await _toyService.GetByIdAsync(orderItem.ToyId);					
 					if (!result.IsSuccess)
@@ -41,7 +41,7 @@ namespace ToyManagementProject.Services
 						return Result<object>.Failure($"{stock.ErrorsNotifications}");
 					}									
 
-					if (orderItem.ErrorsNotifications.Any()) 
+					if (!orderItem.IsValid()) 
 					{
 						return Result<object>.Failure($"{orderItem.ErrorsNotifications}");
 					}					

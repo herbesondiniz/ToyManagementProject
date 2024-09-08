@@ -25,15 +25,15 @@ namespace ToyManagementProject.Services
 		{
 			try
 			{
-				if (toy.ErrorsNotifications.Any()) 
+				if (!toy.IsValid()) 
 				{
 					return Result<ToyDto>.Failure(toy.ErrorsNotifications);
 				}
 
-				var validateErrors = _toyValidator.Validate(toy);
+				//var validateErrors = _toyValidator.Validate(toy);
 
-				if (validateErrors.Any())
-					return Result<ToyDto>.Failure(validateErrors);
+				//if (validateErrors.Any())
+				//	return Result<ToyDto>.Failure(validateErrors);
 											
 				await _serviceBase.AddAsync(toy);
 				await _uow.CommitAsync();

@@ -11,8 +11,7 @@ using ToyManagementProject.Services.Dtos;
 namespace ToyManagementProject.Services
 {
 	public class StockService : IStockService
-	{
-		private readonly IRepositoryBase<Stock> _repository;
+	{		
 		private readonly IStockRepository _stockRepository;
 		private readonly IToyService _toyService;
 		private readonly IUnitOfWork _uow;
@@ -22,8 +21,7 @@ namespace ToyManagementProject.Services
 							IUnitOfWork uow,
 							IToyService toyService,
 							IMapper mapper)
-        {
-			_repository = repositoryBase;
+        {			
 			_stockRepository = stockRepository;
 			_uow = uow;
 			_toyService = toyService;
@@ -45,7 +43,7 @@ namespace ToyManagementProject.Services
 					return Result<StockDto>.Failure(stock.ErrorsNotifications);
 				}
 
-				await _repository.AddAsync(stock);
+				await _stockRepository.AddAsync(stock);
 
 				await _uow.CommitAsync();
 				
@@ -61,11 +59,11 @@ namespace ToyManagementProject.Services
 
 		public async Task DeleteAsync(int id)
 		{
-			await _repository.DeleteAsync(id);	
+			await _stockRepository.DeleteAsync(id);	
 		}
 		public async Task<Result<IList<StockDto>>> GetAllAsync()
 		{
-			var stocks = await _repository.GetAllAsync();
+			var stocks = await _stockRepository.GetAllAsync();
 			
 			if(stocks == null) 
 			{
@@ -77,7 +75,7 @@ namespace ToyManagementProject.Services
 
 		public async Task<Stock> GetByIdAsync(int id)
 		{
-			return await _repository.GetByIdAsync(id);
+			return await _stockRepository.GetByIdAsync(id);
 		}
 
 		public async Task<Stock> GetStockByToyIdAsync(int toyId)
@@ -87,7 +85,7 @@ namespace ToyManagementProject.Services
 
 		public async Task UpdateAsync(Stock obj)
 		{
-			await (_repository.UpdateAsync(obj));	
+			await (_stockRepository.UpdateAsync(obj));	
 		}		
 	}
 }

@@ -10,15 +10,15 @@ using ToyManagementProject.Services.Dtos;
 namespace ToyManagementProject.Services
 {
 	public class OrderService : IOrderService
-	{		
-		private readonly IServiceBase<Order> _serviceBase;
+	{
+		private readonly IOrderRepository _orderRepository;
 		private readonly IOrderItemService _orderItemService;
 		private readonly IOrderProcessingService _orderProcessingService;
 		private readonly IValidator<Order> _orderValidator;
 		private readonly IUnitOfWork _uow;
 		private readonly IMapper _mapper;
 
-		public OrderService(IServiceBase<Order> serviceBase,
+		public OrderService(IOrderRepository orderRepository,
 							IOrderItemService orderItemService,
 							IOrderProcessingService orderProcessingService,
 							IValidator<Order> orderValidator,
@@ -26,7 +26,7 @@ namespace ToyManagementProject.Services
 							IMapper mapper							
 							)
 		{
-			_serviceBase = serviceBase;
+			_orderRepository = orderRepository;
 			_orderItemService = orderItemService;
 			_orderProcessingService = orderProcessingService;
 			_orderValidator = orderValidator;
@@ -55,7 +55,7 @@ namespace ToyManagementProject.Services
 			 
 			try
 			{
-				await _serviceBase.AddAsync(order);
+				await _orderRepository.AddAsync(order);
 				
 				await _uow.CommitAsync();
 				
@@ -72,7 +72,7 @@ namespace ToyManagementProject.Services
 		{
 			try
 			{
-				var orders = await _serviceBase.GetAllAsync();
+				var orders = await _orderRepository.GetAllAsync();
 
 				if (orders == null || orders.Count == 0)
 				{
@@ -104,7 +104,7 @@ namespace ToyManagementProject.Services
 		//}
 		public async Task<Result<OrderDto>> GetByIdAsync(int id)
 		{
-			var order = await (_serviceBase.GetByIdAsync(id));
+			var order = await (_orderRepository.GetByIdAsync(id));
 			if (order == null) 
 			{
 				return Result<OrderDto>.Failure("Order doesn`t exists");
@@ -126,7 +126,7 @@ namespace ToyManagementProject.Services
 		{
 			try
 			{
-				await _serviceBase.DeleteAsync(id);
+				await _orderRepository.DeleteAsync(id);
 				
 				await _uow.CommitAsync();
 
@@ -140,7 +140,7 @@ namespace ToyManagementProject.Services
 		}
 		public async Task UpdateAsync(Order obj)
 		{
-			await (_serviceBase.UpdateAsync(obj));
+			await (_orderRepository.UpdateAsync(obj));
 		}	
 
 		Task<Result<OrderDto>> IOrderService.UpdateAsync(Order order)

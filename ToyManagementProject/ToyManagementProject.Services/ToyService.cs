@@ -5,18 +5,19 @@ using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Services;
 using ToyManagementProject.Infra.Data.UoW;
 using ToyManagementProject.Services.Validators.Interfaces;
+using ToyManagementProject.Domain.Interfaces.Repositories;
 
 namespace ToyManagementProject.Services
 {
 	public class ToyService: IToyService
 	{		
-		private readonly IServiceBase<Toy> _serviceBase;
+		private readonly IToyRepository _toyRepository;
 		private readonly IUnitOfWork _uow;
 		private readonly IMapper _mapper;
 		private readonly IValidator<Toy> _toyValidator;
-		public ToyService(IServiceBase<Toy> serviceBase, IUnitOfWork uow, IMapper mapper, IValidator<Toy> toyValidator)
+		public ToyService(IToyRepository toyRepository, IUnitOfWork uow, IMapper mapper, IValidator<Toy> toyValidator)
 		{
-			_serviceBase = serviceBase;
+			_toyRepository = toyRepository;
 			_uow = uow;
 			_mapper = mapper;
 			_toyValidator = toyValidator;
@@ -35,7 +36,7 @@ namespace ToyManagementProject.Services
 				//if (validateErrors.Any())
 				//	return Result<ToyDto>.Failure(validateErrors);
 											
-				await _serviceBase.AddAsync(toy);
+				await _toyRepository.AddAsync(toy);
 				await _uow.CommitAsync();
 
 				return Result<ToyDto>.Success(_mapper.Map<ToyDto>(toy));
@@ -50,14 +51,14 @@ namespace ToyManagementProject.Services
 		{
 			try
 			{
-				var toy = _serviceBase.GetByIdAsync(id);
+				var toy = _toyRepository.GetByIdAsync(id);
 				
 				if (toy == null) 
 				{
 					return Result<ToyDto>.Failure($"Toy doesn´t exists");
 				}
 
-				await _serviceBase.DeleteAsync(id);
+				await _toyRepository.DeleteAsync(id);
 				
 				await _uow.CommitAsync();
 
@@ -73,7 +74,7 @@ namespace ToyManagementProject.Services
 
 		public async Task<Result<ToyDto>> GetByIdAsync(int id)
 		{
-			var toy = await _serviceBase.GetByIdAsync(id);
+			var toy = await _toyRepository.GetByIdAsync(id);
 			if (toy == null)
 			{
 				return Result<ToyDto>.Failure($"Toy is not registered.");
@@ -90,7 +91,7 @@ namespace ToyManagementProject.Services
 
             try
 			{				
-				await _serviceBase.UpdateAsync(toy);
+				await _toyRepository.UpdateAsync(toy);
 				await _uow.CommitAsync();
 
 				return Result<ToyDto>.Success(_mapper.Map<ToyDto>(toy));
@@ -105,7 +106,7 @@ namespace ToyManagementProject.Services
 
 		public async Task<Result<IEnumerable<ToyDto>>> GetAllAsync()
 		{
-			var toys = await _serviceBase.GetAllAsync();
+			var toys = await _toyRepository.GetAllAsync();
 			if (toys == null)
 			{
 				return Result<IEnumerable<ToyDto>>.Failure($"toys is empty");

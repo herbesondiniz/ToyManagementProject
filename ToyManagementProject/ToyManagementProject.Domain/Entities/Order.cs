@@ -10,49 +10,57 @@ namespace ToyManagementProject.Domain.Entities
 		public int ClientId { get; private set; }
 		public IEnumerable<OrderItem> Items { get; private set; }		
 		public decimal TotalAmount => Items.Sum(item => item.Quantity * item.Price);
-		public IList<string>? ErrorsNotifications { get; private set; }
+		
+		private readonly List<string> _errorsNotifications = new List<string>();
+		public IReadOnlyList<string> ErrorsNotifications => _errorsNotifications.AsReadOnly();
 		public Order()
 		{
-			Items = new List<OrderItem>();
-			ErrorsNotifications = new List<string>();
+			Items = new List<OrderItem>();			
 		}
 		public Order(int clientId, IEnumerable<OrderItem> items)
-		{						
-			ClientId = clientId;						
+		{
+			SetClient(clientId);					
+			AddItems(items ?? new List<OrderItem>());
+		}
 
- 			Items = items ?? new List<OrderItem>();
-
-			ValidationErrors();
+		public void SetClient(int clientId)		
+		{
+			if (clientId <= 0) 
+			{
+				_errorsNotifications.Add($"The Client is required");
+				return;
+			}
+			ClientId = clientId;			
 		}
 
 		public void AddItems(IEnumerable<OrderItem> items) 
-		{			
-			Items = items ?? new List<OrderItem>();
-			
-			ValidationErrors();
-		} 
-		public void ValidationErrors() 
 		{
-			var notifications = new List<string>();
-
-			if(ClientId <= 0)
-				notifications.Add($"ClientId is required");
-
-			if (!Items.Any())
+			if (!items.Any())
 			{
-				notifications.Add("Order must have at least one item.");
-			}
+				_errorsNotifications.Add("Order must have at least one item.");
+				return;
+			}			
 			else
 			{
-				foreach (var item in Items)
+				foreach (var item in items)
 				{
+					if(items.Count() == 1 && item.ToyId == 0) 
+					{
+						_errorsNotifications.Add($"At least 1 Item is required.");
+						return;
+					}
 					if (item.Quantity <= 0)
 					{
-						notifications.Add($"Item {item.Toy.Name} must have a quantity greater than zero.");
+						_errorsNotifications.Add($"Item {item.Toy.Name} must have a quantity greater than zero.");
+						return;
 					}
 				}
 			}
-			ErrorsNotifications = notifications;
+			Items = items;						
+		} 	
+		public bool IsValid() 
+		{
+			return !_errorsNotifications.Any();
 		}
 	}
 }

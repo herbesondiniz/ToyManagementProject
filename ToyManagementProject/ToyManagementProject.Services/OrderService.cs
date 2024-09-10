@@ -22,50 +22,44 @@ namespace ToyManagementProject.Services
 							IOrderItemService orderItemService,
 							IOrderProcessingService orderProcessingService,
 							IValidator<Order> orderValidator,
-							IUnitOfWork uow,							
-							IMapper mapper							
+							IUnitOfWork uow,
+							IMapper mapper
 							)
 		{
 			_orderRepository = orderRepository;
 			_orderItemService = orderItemService;
 			_orderProcessingService = orderProcessingService;
 			_orderValidator = orderValidator;
-			_uow = uow;			
-			_mapper = mapper;			
+			_uow = uow;
+			_mapper = mapper;
 		}
 		public async Task<Result<OrderDto>> AddAsync(Order order)
-		{										
+		{
+			if (order.IsValid())
+			{
+				Result<OrderDto>.Failure(order.ErrorsNotifications);
+			}
 			
-			//validação por classe externa
-			//var validateErrors = _orderValidator.Validate(order);
-
-			//if (validateErrors.Any())
-			//	return Result<OrderDTO>.Failure(validateErrors);
-
 			var processResult = await _orderProcessingService.ProcessOrderAsync(order);
 
-			if (!processResult.IsSuccess) 
+			if (!processResult.IsSuccess)
 			{
 				return Result<OrderDto>.Failure(processResult.Errors);
-			}
+			}	
 
-			//validação pela prória classe através de construtor
-			if (order.ErrorsNotifications.Any())
-				return Result<OrderDto>.Failure(order.ErrorsNotifications);
-			 
 			try
 			{
 				await _orderRepository.AddAsync(order);
-				
+
 				await _uow.CommitAsync();
-				
+
 				return Result<OrderDto>.Success(_mapper.Map<OrderDto>(order));
 			}
 			catch (Exception ex)
 			{
 				await _uow.RollbackAsync();
 				return Result<OrderDto>.Failure(new List<string> { $"An error occurred while processing the order: {ex.Message} " });
-			}			
+			}
 		}
 
 		public async Task<Result<IEnumerable<OrderDto>>> GetAllAsync()
@@ -105,17 +99,17 @@ namespace ToyManagementProject.Services
 		public async Task<Result<OrderDto>> GetByIdAsync(int id)
 		{
 			var order = await (_orderRepository.GetByIdAsync(id));
-			if (order == null) 
+			if (order == null)
 			{
 				return Result<OrderDto>.Failure("Order doesn`t exists");
 			}
 
 			var result = await _orderItemService.GetAllAsync();
-			if (!result.IsSuccess) 
+			if (!result.IsSuccess)
 			{
 				return Result<OrderDto>.Failure(result.Errors);
 			}
-			var items = _mapper.Map<IEnumerable<OrderItem>>(result.Data).Where(x => x.OrderId == id);			
+			var items = _mapper.Map<IEnumerable<OrderItem>>(result.Data).Where(x => x.OrderId == id);
 
 			order.AddItems(items);
 
@@ -127,21 +121,21 @@ namespace ToyManagementProject.Services
 			try
 			{
 				await _orderRepository.DeleteAsync(id);
-				
+
 				await _uow.CommitAsync();
 
 				return Result<OrderDto>.Success(new OrderDto());
 			}
 			catch (Exception ex)
 			{
-				return Result<OrderDto>.Failure($"Error DeleteAsync: {ex.Message}");				
+				return Result<OrderDto>.Failure($"Error DeleteAsync: {ex.Message}");
 			}
-			
+
 		}
 		public async Task UpdateAsync(Order obj)
 		{
 			await (_orderRepository.UpdateAsync(obj));
-		}	
+		}
 
 		Task<Result<OrderDto>> IOrderService.UpdateAsync(Order order)
 		{

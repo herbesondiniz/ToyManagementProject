@@ -10,7 +10,7 @@ namespace ToyManagementProject.Domain.Entities
 		[Key]
 		public int Id { get; private set; }
 		public int ToyId { get; private set; }
-		public Toy Toy { get; private set; }
+		public Toy? Toy { get; private set; }
 		public int Quantity { get; private set; }
 		
 		private readonly List<string> _errorsNotifications = new List<string>();
@@ -54,7 +54,7 @@ namespace ToyManagementProject.Domain.Entities
 		{
 			if (quantity <= 0)
 			{
-				_errorsNotifications.Add($"Quantity is bigger than current stock");
+				_errorsNotifications.Add($"Quantity must be bigger than 0");
 				return;
 			}
 

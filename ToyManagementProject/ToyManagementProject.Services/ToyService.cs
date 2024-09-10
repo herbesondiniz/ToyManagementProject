@@ -14,13 +14,16 @@ namespace ToyManagementProject.Services
 		private readonly IToyRepository _toyRepository;
 		private readonly IUnitOfWork _uow;
 		private readonly IMapper _mapper;
-		private readonly IValidator<Toy> _toyValidator;
-		public ToyService(IToyRepository toyRepository, IUnitOfWork uow, IMapper mapper, IValidator<Toy> toyValidator)
+		//private readonly IValidator<Toy> _toyValidator;
+		public ToyService(IToyRepository toyRepository, 
+						  IUnitOfWork uow, 
+						  IMapper mapper, 
+						  IValidator<Toy> toyValidator)
 		{
 			_toyRepository = toyRepository;
 			_uow = uow;
 			_mapper = mapper;
-			_toyValidator = toyValidator;
+			//_toyValidator = toyValidator;
 		}
 		public async Task<Result<ToyDto>> AddAsync(Toy toy)
 		{

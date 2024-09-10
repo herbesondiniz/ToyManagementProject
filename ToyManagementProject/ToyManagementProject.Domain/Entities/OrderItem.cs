@@ -9,7 +9,7 @@ namespace ToyManagementProject.Domain.Entities
 		[Key]
 		public int Id { get; private set; }
         public int ToyId { get; private set; }
-        public Toy Toy { get; private set; }
+        public Toy? Toy { get; private set; }
 		public int OrderId { get; private set; }
 		public int Quantity { get; private set; }
 		public decimal Price { get; private set; }

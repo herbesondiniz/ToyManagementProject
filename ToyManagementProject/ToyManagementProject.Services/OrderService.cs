@@ -5,7 +5,6 @@ using ToyManagementProject.Domain.Interfaces.Services;
 using ToyManagementProject.Infra.Data.UoW;
 using AutoMapper;
 using ToyManagementProject.Services.Dtos;
-using ToyManagementProject.Infra.Data.RepoEF;
 
 namespace ToyManagementProject.Services
 {
@@ -35,7 +34,7 @@ namespace ToyManagementProject.Services
 		}
 		public async Task<Result<OrderDto>> AddAsync(Order order)
 		{
-			if (order.IsValid())
+			if (!order.IsValid())
 			{
 				return Result<OrderDto>.Failure(order.ErrorsNotifications);
 			}

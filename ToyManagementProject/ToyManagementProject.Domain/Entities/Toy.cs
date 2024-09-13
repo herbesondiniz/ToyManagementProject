@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Xml.Linq;
 
 namespace ToyManagementProject.Domain.Entities
 {

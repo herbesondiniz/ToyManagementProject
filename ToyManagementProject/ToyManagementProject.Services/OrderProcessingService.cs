@@ -33,7 +33,7 @@ namespace ToyManagementProject.Services
 
 					var toy = _mapper.Map<Toy>(resultToy.Data);
 
-					if (toy.IsValid()) 
+					if (!toy.IsValid()) 
 					{
 						return Result<object>.Failure($"{toy.ErrorsNotifications}");
 					}
@@ -54,12 +54,7 @@ namespace ToyManagementProject.Services
 						return Result<object>.Failure($"{stock.ErrorsNotifications}");
 					}
 																
-					stock.DeductFromStock(orderItem.Quantity);															
-
-					if (!orderItem.IsValid()) 
-					{
-						return Result<object>.Failure($"{orderItem.ErrorsNotifications}");
-					}					
+					stock.DeductFromStock(orderItem.Quantity);																								
 				}
 				if (order.TotalAmount <= 0)
 				{

@@ -1,5 +1,4 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using ToyManagementProject.Domain;
 using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Repositories;
@@ -28,18 +27,18 @@ namespace ToyManagementProject.Services
 		}		
 		public async Task<Result<StockDto>> AddAsync(Stock stock)
 		{
+			if (!stock.IsValid())
+			{
+				return Result<StockDto>.Failure(stock.ErrorsNotifications);
+			}
+
 			var stockResult = await _toyService.GetByIdAsync(stock.ToyId);
 			
 			if (!stockResult.IsSuccess) 
 			{
 				return Result<StockDto>.Failure(stockResult.Errors);
 			}
-
-			if (!stock.IsValid())
-			{
-				return Result<StockDto>.Failure(stock.ErrorsNotifications);
-			}
-
+			
 			try
 			{				
 				await _stockRepository.AddAsync(stock);

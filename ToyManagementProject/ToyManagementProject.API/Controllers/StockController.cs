@@ -8,7 +8,7 @@ using ToyManagementProject.Services.Dtos;
 namespace StockManagementProject.API.Controllers
 {
 	[ApiController]
-	[Route("[controller]")]	
+	[Route("[controller]")]
 	public class StockController : ControllerBase
 	{
 		private readonly IStockService _stockService;
@@ -24,11 +24,11 @@ namespace StockManagementProject.API.Controllers
 			_mapper = mapper;
 		}
 		[HttpGet]
-		public async Task<ActionResult<List<Stock>>> GetAll()
+		public async Task<ActionResult<List<StockDto>>> GetAll()
 		{
 			var result = await _stockService.GetAllAsync();
-			
-			if (!result.IsSuccess) 
+
+			if (!result.IsSuccess)
 			{
 				return UnprocessableEntity(result.Errors);
 			}
@@ -37,14 +37,16 @@ namespace StockManagementProject.API.Controllers
 		}
 
 		[HttpGet("{id}")]
-		public async Task<ActionResult<Stock>> GetById(int id)
+		public async Task<ActionResult<StockDto>> GetById(int id)
 		{
-			var stock = await _stockService.GetByIdAsync(id);
-			if (stock == null)
+			var stockDto = await _stockService.GetByIdAsync(id);
+			
+			if (!stockDto.IsSuccess)
 			{
 				return NotFound();
 			}
-			return Ok(stock);
+
+			return Ok(stockDto);
 		}
 
 		[HttpPost]
@@ -61,52 +63,33 @@ namespace StockManagementProject.API.Controllers
 		}
 
 		[HttpPut("{id}")]
-		public async Task<ActionResult> Update(int id, Stock stock)
+		public async Task<ActionResult> Update(int id, StockDto stockDto)
 		{
-			if (id != stock.Id)
+			if (id != stockDto.Id)
 			{
 				return BadRequest();
 			}
 
-			var toy = _toyService.GetByIdAsync(stock.ToyId);
-
-			if (toy == null)
-				return NotFound("This toy is not registered.");
-
-			try
+			var result = await _stockService.UpdateAsync(_mapper.Map<Stock>(stockDto));
+			
+			if (!result.IsSuccess) 
 			{
-				await _stockService.UpdateAsync(stock);
+				return UnprocessableEntity(result.Errors);
+			}
 
-				await _uow.CommitAsync();
-			}
-			catch (Exception)
-			{
-				await _uow.RollbackAsync();
-			}
-		
 			return NoContent();
 		}
 
 		[HttpDelete("{id}")]
 		public async Task<ActionResult> Delete(int id)
 		{
-			var stock = await _stockService.GetByIdAsync(id);
-			if (stock == null)
-			{
-				return NotFound();
-			}
+			var result = await _stockService.DeleteAsync(id);
 
-			try
+			if (!result.IsSuccess) 
 			{
-				await _stockService.DeleteAsync(id);
-				
-				await _uow.CommitAsync();
+				return UnprocessableEntity(result.Errors);
 			}
-			catch (Exception)
-			{
-				await _uow.RollbackAsync();			
-			}
-			
+			 
 			return NoContent();
 		}
 	}

@@ -4,8 +4,8 @@ using ToyManagementProject.Domain.Interfaces.Repositories;
 using ToyManagementProject.Domain.Interfaces.Services;
 using ToyManagementProject.Infra.Data.UoW;
 using AutoMapper;
-using ToyManagementProject.Services.Validators.Interfaces;
 using ToyManagementProject.Services.Dtos;
+using ToyManagementProject.Infra.Data.RepoEF;
 
 namespace ToyManagementProject.Services
 {
@@ -14,14 +14,14 @@ namespace ToyManagementProject.Services
 		private readonly IOrderRepository _orderRepository;
 		private readonly IOrderItemService _orderItemService;
 		private readonly IOrderProcessingService _orderProcessingService;
-		private readonly IValidator<Order> _orderValidator;
+		//private readonly IValidator<Order> _orderValidator;
 		private readonly IUnitOfWork _uow;
 		private readonly IMapper _mapper;
 
 		public OrderService(IOrderRepository orderRepository,
 							IOrderItemService orderItemService,
 							IOrderProcessingService orderProcessingService,
-							IValidator<Order> orderValidator,
+							//IValidator<Order> orderValidator,
 							IUnitOfWork uow,
 							IMapper mapper
 							)
@@ -29,7 +29,7 @@ namespace ToyManagementProject.Services
 			_orderRepository = orderRepository;
 			_orderItemService = orderItemService;
 			_orderProcessingService = orderProcessingService;
-			_orderValidator = orderValidator;
+			//_orderValidator = orderValidator;
 			_uow = uow;
 			_mapper = mapper;
 		}
@@ -37,15 +37,15 @@ namespace ToyManagementProject.Services
 		{
 			if (order.IsValid())
 			{
-				Result<OrderDto>.Failure(order.ErrorsNotifications);
+				return Result<OrderDto>.Failure(order.ErrorsNotifications);
 			}
-			
+
 			var processResult = await _orderProcessingService.ProcessOrderAsync(order);
 
 			if (!processResult.IsSuccess)
 			{
 				return Result<OrderDto>.Failure(processResult.Errors);
-			}	
+			}
 
 			try
 			{
@@ -64,47 +64,45 @@ namespace ToyManagementProject.Services
 
 		public async Task<Result<IEnumerable<OrderDto>>> GetAllAsync()
 		{
-			try
+			var orders = await _orderRepository.GetAllAsync();
+
+			if (orders == null || orders.Count == 0)
 			{
-				var orders = await _orderRepository.GetAllAsync();
-
-				if (orders == null || orders.Count == 0)
-				{
-					return Result<IEnumerable<OrderDto>>.Failure("Orders list is empty");
-				}
-
-				var allItems = await _orderItemService.GetAllAsync();
-				var itemsByOrderId = _mapper.Map<List<OrderItem>>(allItems).GroupBy(x => x.OrderId);
-
-				foreach (var order in orders)
-				{
-					var items = itemsByOrderId.FirstOrDefault(g => g.Key == order.Id)?.ToList() ?? new List<OrderItem>();
-
-					order.AddItems(items);
-				}
-
-				var ordersDTO = _mapper.Map<IEnumerable<OrderDto>>(orders);
-
-				return Result<IEnumerable<OrderDto>>.Success(ordersDTO);
+				return Result<IEnumerable<OrderDto>>.Failure("Orders list is empty");
 			}
-			catch (Exception ex)
+
+			var allItems = await _orderItemService.GetAllAsync();
+
+			if (!allItems.IsSuccess)
 			{
-				return Result<IEnumerable<OrderDto>>.Failure(new List<string> { $"Error GetAllAsync: {ex.Message} " });
+				return Result<IEnumerable<OrderDto>>.Failure("Items list is empty");
 			}
+
+			var itemsByOrderId = _mapper.Map<List<OrderItem>>(allItems).GroupBy(x => x.OrderId);
+
+			foreach (var order in orders)
+			{
+				var items = itemsByOrderId.FirstOrDefault(g => g.Key == order.Id)?.ToList() ?? new List<OrderItem>();
+
+				order.AddItems(items);
+			}
+
+			var ordersDTO = _mapper.Map<IEnumerable<OrderDto>>(orders);
+
+			return Result<IEnumerable<OrderDto>>.Success(ordersDTO);
+
 		}
-		//Task<Result<OrderDto>> IOrderService.GetByIdAsync(int id)
-		//{
-		//	throw new NotImplementedException();
-		//}
 		public async Task<Result<OrderDto>> GetByIdAsync(int id)
 		{
-			var order = await (_orderRepository.GetByIdAsync(id));
+			var order = await _orderRepository.GetByIdAsync(id);
+			
 			if (order == null)
 			{
 				return Result<OrderDto>.Failure("Order doesn`t exists");
 			}
 
 			var result = await _orderItemService.GetAllAsync();
+			
 			if (!result.IsSuccess)
 			{
 				return Result<OrderDto>.Failure(result.Errors);
@@ -118,6 +116,13 @@ namespace ToyManagementProject.Services
 
 		public async Task<Result<OrderDto>> DeleteAsync(int id)
 		{
+			var order = await _orderRepository.GetByIdAsync(id);
+
+			if (order == null)
+			{
+				return Result<OrderDto>.Failure($"Order doesn´t exists");
+			}
+		
 			try
 			{
 				await _orderRepository.DeleteAsync(id);
@@ -132,14 +137,26 @@ namespace ToyManagementProject.Services
 			}
 
 		}
-		public async Task UpdateAsync(Order obj)
+		public async Task<Result<OrderDto>> UpdateAsync(Order order)
 		{
-			await (_orderRepository.UpdateAsync(obj));
-		}
+			if (!order.IsValid())
+			{
+				return Result<OrderDto>.Failure(order.ErrorsNotifications);
+			}
 
-		Task<Result<OrderDto>> IOrderService.UpdateAsync(Order order)
-		{
-			throw new NotImplementedException();
+			try
+			{
+				await _orderRepository.UpdateAsync(order);
+
+				await _uow.CommitAsync();
+
+				return Result<OrderDto>.Success(null, "Toy updated");
+			}
+			catch (Exception ex)
+			{
+				return Result<OrderDto>.Failure(new List<string> { $"Error UpdateAsync: {ex.Message}" });
+				throw;
+			}
 		}
 	}
 }

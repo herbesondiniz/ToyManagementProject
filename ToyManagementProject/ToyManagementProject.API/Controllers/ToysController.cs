@@ -34,7 +34,7 @@ namespace ToyManagementProject.API.Controllers
 		}
 
 		[HttpGet("{id}")]
-		public async Task<ActionResult<Toy>> GetById(int id)
+		public async Task<ActionResult<ToyDto>> GetById(int id)
 		{
 			var result = await _toyService.GetByIdAsync(id);
 			if (!result.IsSuccess)
@@ -72,7 +72,7 @@ namespace ToyManagementProject.API.Controllers
 				return UnprocessableEntity(result.Errors);
 			}
 
-			return CreatedAtAction(nameof(GetById), new { id = result.Data.Id }, result);
+			return Ok(result);
 		}
 
 		[HttpDelete("{id}")]
@@ -85,7 +85,7 @@ namespace ToyManagementProject.API.Controllers
 				return UnprocessableEntity(result.Errors);
 			}
 
-			return Ok(result.Data);
+			return NoContent();
 		}
 	}
 }

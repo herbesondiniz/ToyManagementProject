@@ -24,22 +24,37 @@ namespace ToyManagementProject.Services
 				{
 					orderItem.SetOrderId(order.Id);
 
-					var result = await _toyService.GetByIdAsync(orderItem.ToyId);					
-					if (!result.IsSuccess)
+					var resultToy = await _toyService.GetByIdAsync(orderItem.ToyId);					
+					
+					if (!resultToy.IsSuccess)
 					{
-						return Result<object>.Failure($"{result.Errors}");
+						return Result<object>.Failure($"{resultToy.Errors}");
 					}
-					
-					orderItem.SetToy(_mapper.Map<Toy>(result.Data));										
 
-					var stock = await _stockService.GetStockByToyIdAsync(orderItem.Toy.Id);
-																
-					stock.DeductFromStock(orderItem.Quantity);
-					
-					if (stock.ErrorsNotifications.Any()) 
+					var toy = _mapper.Map<Toy>(resultToy.Data);
+
+					if (toy.IsValid()) 
+					{
+						return Result<object>.Failure($"{toy.ErrorsNotifications}");
+					}
+
+					orderItem.SetToy(toy);										
+
+					var resultStock = await _stockService.GetStockByToyIdAsync(orderItem.Toy.Id);
+
+					if (!resultStock.IsSuccess) 
+					{
+						return Result<object>.Failure($"{resultStock.Errors}");
+					}
+
+					var stock = _mapper.Map<Stock>(resultStock.Data);
+
+					if (!stock.IsValid()) 
 					{
 						return Result<object>.Failure($"{stock.ErrorsNotifications}");
-					}									
+					}
+																
+					stock.DeductFromStock(orderItem.Quantity);															
 
 					if (!orderItem.IsValid()) 
 					{
@@ -48,10 +63,10 @@ namespace ToyManagementProject.Services
 				}
 				if (order.TotalAmount <= 0)
 				{
-					return Result<object>.Failure($"Orders list is empty");
+					return Result<object>.Failure($"Error calculating the total amount.");
 				}
 
-				return Result<object>.Success(null, "Order created");
+				return Result<object>.Success("", "Order created");
 			}
 			catch (Exception ex)
 			{

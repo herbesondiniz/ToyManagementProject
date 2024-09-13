@@ -1,6 +1,5 @@
 ﻿
 using AutoMapper;
-using System.Collections.Generic;
 using ToyManagementProject.Domain;
 using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Repositories;
@@ -29,25 +28,25 @@ namespace ToyManagementProject.Services
 		}		
 		public async Task<Result<StockDto>> AddAsync(Stock stock)
 		{
-			var result = await _toyService.GetByIdAsync(stock.ToyId);
+			var stockResult = await _toyService.GetByIdAsync(stock.ToyId);
 			
-			if (!result.IsSuccess) 
+			if (!stockResult.IsSuccess) 
 			{
-				return Result<StockDto>.Failure(result.Errors);
-			}		
+				return Result<StockDto>.Failure(stockResult.Errors);
+			}
+
+			if (!stock.IsValid())
+			{
+				return Result<StockDto>.Failure(stock.ErrorsNotifications);
+			}
 
 			try
-			{
-				if (!stock.IsValid())
-				{
-					return Result<StockDto>.Failure(stock.ErrorsNotifications);
-				}
-
+			{				
 				await _stockRepository.AddAsync(stock);
 
 				await _uow.CommitAsync();
 				
-				stock.SetToy(_mapper.Map<Toy>(result.Data));
+				stock.SetToy(_mapper.Map<Toy>(stockResult.Data));
 
 				return Result<StockDto>.Success(_mapper.Map<StockDto>(stock));
 			}
@@ -57,35 +56,91 @@ namespace ToyManagementProject.Services
 			}
 		}
 
-		public async Task DeleteAsync(int id)
+		public async Task<Result<StockDto>> DeleteAsync(int id)
 		{
-			await _stockRepository.DeleteAsync(id);	
+			var stock = await _stockRepository.GetByIdAsync(id);
+
+			if (stock == null)
+			{
+				return Result<StockDto>.Failure($"the stock is empty");
+			}
+
+			try
+			{				
+				await _stockRepository.DeleteAsync(id);
+
+				await _uow.CommitAsync();
+
+				var stockDto = _mapper.Map<StockDto>(stock);
+
+				return Result<StockDto>.Success(stockDto);
+			}
+			catch (Exception ex)
+			{
+				return Result<StockDto>.Failure(new List<string> { $"Error Delete: {ex.Message}" });
+			}
 		}
 		public async Task<Result<IList<StockDto>>> GetAllAsync()
 		{
 			var stocks = await _stockRepository.GetAllAsync();
 			
-			if(stocks == null) 
+			if(stocks == null || stocks.Count() == 0) 
 			{
 				return Result<IList<StockDto>>.Failure($"stocks list is empty");
 			}
 
 			return Result<IList<StockDto>>.Success(_mapper.Map<IList<StockDto>>(stocks));
 		}
-
-		public async Task<Stock> GetByIdAsync(int id)
+		public async Task<Result<StockDto>> GetByIdAsync(int id)
 		{
-			return await _stockRepository.GetByIdAsync(id);
+			var stock = await _stockRepository.GetByIdAsync(id);
+			
+			if(stock == null) 
+			{
+				return Result<StockDto>.Failure($"Stock is empty");
+			}
+			
+			return Result<StockDto>.Success(_mapper.Map<StockDto>(stock));
 		}
 
-		public async Task<Stock> GetStockByToyIdAsync(int toyId)
+		public async Task<Result<StockDto>> GetStockByToyIdAsync(int toyId)
 		{
-			return await _stockRepository.GetStockByToyIdAsync(toyId);
+			var stock = await _stockRepository.GetStockByToyIdAsync(toyId);
+
+			if(stock == null)
+			{
+				return Result<StockDto>.Failure($"the stock is empty");
+			}
+
+			return Result<StockDto>.Success(_mapper.Map<StockDto>(stock));
 		}
 
-		public async Task UpdateAsync(Stock obj)
+		public async Task<Result<StockDto>> UpdateAsync(Stock stock)
 		{
-			await (_stockRepository.UpdateAsync(obj));	
+			if (!stock.IsValid()) 
+			{
+				return Result<StockDto>.Failure(stock.ErrorsNotifications);
+			}
+
+			var result = await _toyService.GetByIdAsync(stock.Id);
+
+			if (!result.IsSuccess) 
+			{
+				return Result<StockDto>.Failure(result.Errors);
+			}
+				
+			try
+			{
+				await _stockRepository.UpdateAsync(stock);
+				
+				await _uow.CommitAsync();
+				
+				return Result<StockDto>.Success(_mapper.Map<StockDto>(stock));
+			}
+			catch (Exception ex)
+			{
+				return Result<StockDto>.Failure(ex.Message);
+			}				
 		}		
 	}
 }

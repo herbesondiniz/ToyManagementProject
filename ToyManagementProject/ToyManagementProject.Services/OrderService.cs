@@ -5,6 +5,7 @@ using ToyManagementProject.Domain.Interfaces.Services;
 using ToyManagementProject.Infra.Data.UoW;
 using AutoMapper;
 using ToyManagementProject.Services.Dtos;
+using Microsoft.EntityFrameworkCore;
 
 namespace ToyManagementProject.Services
 {
@@ -55,36 +56,19 @@ namespace ToyManagementProject.Services
 				return Result<OrderDto>.Success(_mapper.Map<OrderDto>(order));
 			}
 			catch (Exception ex)
-			{
-				await _uow.RollbackAsync();
+			{				
 				return Result<OrderDto>.Failure(new List<string> { $"An error occurred while processing the order: {ex.Message} " });
 			}
 		}
 
 		public async Task<Result<IEnumerable<OrderDto>>> GetAllAsync()
 		{
-			var orders = await _orderRepository.GetAllAsync();
+			var orders = await _orderRepository.GetAllAsync(q => q.Include(o=>o.Items));
 
 			if (orders == null || orders.Count == 0)
 			{
 				return Result<IEnumerable<OrderDto>>.Failure("Orders list is empty");
-			}
-
-			var allItems = await _orderItemService.GetAllAsync();
-
-			if (!allItems.IsSuccess)
-			{
-				return Result<IEnumerable<OrderDto>>.Failure("Items list is empty");
-			}
-
-			var itemsByOrderId = _mapper.Map<List<OrderItem>>(allItems).GroupBy(x => x.OrderId);
-
-			foreach (var order in orders)
-			{
-				var items = itemsByOrderId.FirstOrDefault(g => g.Key == order.Id)?.ToList() ?? new List<OrderItem>();
-
-				order.AddItems(items);
-			}
+			}			
 
 			var ordersDTO = _mapper.Map<IEnumerable<OrderDto>>(orders);
 
@@ -93,22 +77,12 @@ namespace ToyManagementProject.Services
 		}
 		public async Task<Result<OrderDto>> GetByIdAsync(int id)
 		{
-			var order = await _orderRepository.GetByIdAsync(id);
+			var order = await _orderRepository.GetByIdAsync(id, q=> q.Include(o=> o.Items));
 			
 			if (order == null)
 			{
 				return Result<OrderDto>.Failure("Order doesn`t exists");
-			}
-
-			var result = await _orderItemService.GetAllAsync();
-			
-			if (!result.IsSuccess)
-			{
-				return Result<OrderDto>.Failure(result.Errors);
-			}
-			var items = _mapper.Map<IEnumerable<OrderItem>>(result.Data).Where(x => x.OrderId == id);
-
-			order.AddItems(items);
+			}			
 
 			return Result<OrderDto>.Success(_mapper.Map<OrderDto>(order));
 		}

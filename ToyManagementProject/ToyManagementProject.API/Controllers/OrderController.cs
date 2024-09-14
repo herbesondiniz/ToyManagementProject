@@ -62,7 +62,7 @@ namespace ToyManagementProject.API.Controllers
 				return UnprocessableEntity(result.Errors);
 			}
 
-			return CreatedAtAction(nameof(GetById), new { id = result.Data.Id }, result.Data);
+			return CreatedAtAction(nameof(GetById), new { id = result.Data.Id }, result);
 		}
 
 		[HttpPut("{id}")]

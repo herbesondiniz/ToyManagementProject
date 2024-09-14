@@ -24,7 +24,7 @@ namespace ToyManagementProject.Services.Validators
 				{
 					if (item.Quantity <= 0)
 					{
-						_notifications.Add($"Item {item.Toy.Name} must have a quantity greater than zero.");
+						_notifications.Add($"Item {item.ToyId} must have a quantity greater than zero.");
 					}
 				}
 			}

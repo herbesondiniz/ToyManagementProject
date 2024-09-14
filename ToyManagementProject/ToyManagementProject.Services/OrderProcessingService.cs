@@ -40,7 +40,7 @@ namespace ToyManagementProject.Services
 
 					orderItem.SetToy(toy);										
 
-					var resultStock = await _stockService.GetStockByToyIdAsync(orderItem.Toy.Id);
+					var resultStock = await _stockService.GetStockByToyIdAsync(orderItem.ToyId);
 
 					if (!resultStock.IsSuccess) 
 					{
@@ -54,7 +54,10 @@ namespace ToyManagementProject.Services
 						return Result<object>.Failure($"{stock.ErrorsNotifications}");
 					}
 																
-					stock.DeductFromStock(orderItem.Quantity);																								
+					stock.DeductFromStock(orderItem.Quantity);
+					
+					await _stockService.UpdateAsync(stock);
+
 				}
 				if (order.TotalAmount <= 0)
 				{

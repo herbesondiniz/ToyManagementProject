@@ -8,11 +8,10 @@ namespace ToyManagementProject.Domain.Entities
 	{
 		[Key]
 		public int Id { get; private set; }
-        public int ToyId { get; private set; }
-        //public Toy? Toy { get; private set; }
-		public int OrderId { get; private set; }
+        public int ToyId { get; private set; }        
+		public int OrderId { get; private set; }		
 		public int Quantity { get; private set; }
-		public decimal Price { get; private set; }
+		public decimal Price { get; private set; }	
 
 		private readonly List<string> _errorsNotifications = new List<string>();
 		public IReadOnlyList<string> ErrorsNotifications => _errorsNotifications.AsReadOnly();		
@@ -31,8 +30,7 @@ namespace ToyManagementProject.Domain.Entities
 				_errorsNotifications.Add($"Toy is empty");
 				return;
 			}
-
-			//Toy = toy;
+			
 			ToyId = toy.Id;
 			Price = toy.Price;
 		}

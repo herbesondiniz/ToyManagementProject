@@ -3,32 +3,24 @@
   "WorkspaceRootPath": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A4CC1E45-4DCB-41CC-BC98-DFAB86B8E097}|ToyManagementProject.Services\\ToyManagementProject.Services.csproj|c:\\github\\toymanagementproject\\toymanagementproject\\toymanagementproject.services\\orderprocessingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A4CC1E45-4DCB-41CC-BC98-DFAB86B8E097}|ToyManagementProject.Services\\ToyManagementProject.Services.csproj|solutionrelative:toymanagementproject.services\\orderprocessingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A4CC1E45-4DCB-41CC-BC98-DFAB86B8E097}|ToyManagementProject.Services\\ToyManagementProject.Services.csproj|c:\\github\\toymanagementproject\\toymanagementproject\\toymanagementproject.services\\mappings\\orderprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A4CC1E45-4DCB-41CC-BC98-DFAB86B8E097}|ToyManagementProject.Services\\ToyManagementProject.Services.csproj|solutionrelative:toymanagementproject.services\\mappings\\orderprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A4CC1E45-4DCB-41CC-BC98-DFAB86B8E097}|ToyManagementProject.Services\\ToyManagementProject.Services.csproj|c:\\github\\toymanagementproject\\toymanagementproject\\toymanagementproject.services\\dtos\\orderitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A4CC1E45-4DCB-41CC-BC98-DFAB86B8E097}|ToyManagementProject.Services\\ToyManagementProject.Services.csproj|solutionrelative:toymanagementproject.services\\dtos\\orderitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A4CC1E45-4DCB-41CC-BC98-DFAB86B8E097}|ToyManagementProject.Services\\ToyManagementProject.Services.csproj|c:\\github\\toymanagementproject\\toymanagementproject\\toymanagementproject.services\\mappings\\toyprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A4CC1E45-4DCB-41CC-BC98-DFAB86B8E097}|ToyManagementProject.Services\\ToyManagementProject.Services.csproj|solutionrelative:toymanagementproject.services\\mappings\\toyprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9DFE1EEC-BB9C-47E8-932F-EE063F599FF3}|ToyManagementProject.Infra.Data\\ToyManagementProject.Infra.Data.csproj|c:\\github\\toymanagementproject\\toymanagementproject\\toymanagementproject.infra.data\\repoef\\orderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9DFE1EEC-BB9C-47E8-932F-EE063F599FF3}|ToyManagementProject.Infra.Data\\ToyManagementProject.Infra.Data.csproj|solutionrelative:toymanagementproject.infra.data\\repoef\\orderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CEED0F7E-E69E-43D2-9F25-E6489986E441}|ToyManagementProject.Domain\\ToyManagementProject.Domain.csproj|c:\\github\\toymanagementproject\\toymanagementproject\\toymanagementproject.domain\\entities\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CEED0F7E-E69E-43D2-9F25-E6489986E441}|ToyManagementProject.Domain\\ToyManagementProject.Domain.csproj|solutionrelative:toymanagementproject.domain\\entities\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CEED0F7E-E69E-43D2-9F25-E6489986E441}|ToyManagementProject.Domain\\ToyManagementProject.Domain.csproj|c:\\github\\toymanagementproject\\toymanagementproject\\toymanagementproject.domain\\entities\\toy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CEED0F7E-E69E-43D2-9F25-E6489986E441}|ToyManagementProject.Domain\\ToyManagementProject.Domain.csproj|solutionrelative:toymanagementproject.domain\\entities\\toy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A4CC1E45-4DCB-41CC-BC98-DFAB86B8E097}|ToyManagementProject.Services\\ToyManagementProject.Services.csproj|c:\\github\\toymanagementproject\\toymanagementproject\\toymanagementproject.services\\mappings\\stockprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A4CC1E45-4DCB-41CC-BC98-DFAB86B8E097}|ToyManagementProject.Services\\ToyManagementProject.Services.csproj|solutionrelative:toymanagementproject.services\\mappings\\stockprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CE5CA26B-6429-4FF5-8C78-22F14E5E07CA}|ToyManagementProject.API\\ToyManagementProject.API.csproj|c:\\github\\toymanagementproject\\toymanagementproject\\toymanagementproject.api\\controllers\\toyscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CE5CA26B-6429-4FF5-8C78-22F14E5E07CA}|ToyManagementProject.API\\ToyManagementProject.API.csproj|solutionrelative:toymanagementproject.api\\controllers\\toyscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A4CC1E45-4DCB-41CC-BC98-DFAB86B8E097}|ToyManagementProject.Services\\ToyManagementProject.Services.csproj|c:\\github\\toymanagementproject\\toymanagementproject\\toymanagementproject.services\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A4CC1E45-4DCB-41CC-BC98-DFAB86B8E097}|ToyManagementProject.Services\\ToyManagementProject.Services.csproj|solutionrelative:toymanagementproject.services\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CE5CA26B-6429-4FF5-8C78-22F14E5E07CA}|ToyManagementProject.API\\ToyManagementProject.API.csproj|c:\\github\\toymanagementproject\\toymanagementproject\\toymanagementproject.api\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE5CA26B-6429-4FF5-8C78-22F14E5E07CA}|ToyManagementProject.API\\ToyManagementProject.API.csproj|solutionrelative:toymanagementproject.api\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,97 +30,71 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "OrderItemDto.cs",
-              "DocumentMoniker": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Services\\Dtos\\OrderItemDto.cs",
-              "RelativeDocumentMoniker": "ToyManagementProject.Services\\Dtos\\OrderItemDto.cs",
-              "ToolTip": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Services\\Dtos\\OrderItemDto.cs",
-              "RelativeToolTip": "ToyManagementProject.Services\\Dtos\\OrderItemDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAACAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T22:26:35.168Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Order.cs",
-              "DocumentMoniker": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Domain\\Entities\\Order.cs",
-              "RelativeDocumentMoniker": "ToyManagementProject.Domain\\Entities\\Order.cs",
-              "ToolTip": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Domain\\Entities\\Order.cs",
-              "RelativeToolTip": "ToyManagementProject.Domain\\Entities\\Order.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAuwAoAAAAbAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T21:56:38.687Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "OrderRepository.cs",
-              "DocumentMoniker": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Infra.Data\\RepoEF\\OrderRepository.cs",
-              "RelativeDocumentMoniker": "ToyManagementProject.Infra.Data\\RepoEF\\OrderRepository.cs",
-              "ToolTip": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Infra.Data\\RepoEF\\OrderRepository.cs",
-              "RelativeToolTip": "ToyManagementProject.Infra.Data\\RepoEF\\OrderRepository.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAvwBEAAAAiAAAA",
+              "Title": "StockProfile.cs",
+              "DocumentMoniker": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Services\\Mappings\\StockProfile.cs",
+              "RelativeDocumentMoniker": "ToyManagementProject.Services\\Mappings\\StockProfile.cs",
+              "ToolTip": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Services\\Mappings\\StockProfile.cs",
+              "RelativeToolTip": "ToyManagementProject.Services\\Mappings\\StockProfile.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T21:30:20.697Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "OrderService.cs",
-              "DocumentMoniker": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Services\\OrderService.cs",
-              "RelativeDocumentMoniker": "ToyManagementProject.Services\\OrderService.cs",
-              "ToolTip": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Services\\OrderService.cs",
-              "RelativeToolTip": "ToyManagementProject.Services\\OrderService.cs",
-              "ViewState": "AQIAACMAAAAAAAAAAIAxwCoAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T17:56:01.072Z",
+              "WhenOpened": "2024-09-15T17:26:38.981Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "OrderProcessingService.cs",
-              "DocumentMoniker": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Services\\OrderProcessingService.cs",
-              "RelativeDocumentMoniker": "ToyManagementProject.Services\\OrderProcessingService.cs",
-              "ToolTip": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Services\\OrderProcessingService.cs",
-              "RelativeToolTip": "ToyManagementProject.Services\\OrderProcessingService.cs",
-              "ViewState": "AQIAABoAAAAAAAAAAAAjwCEAAAAwAAAA",
+              "Title": "OrderProfile.cs",
+              "DocumentMoniker": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Services\\Mappings\\OrderProfile.cs",
+              "RelativeDocumentMoniker": "ToyManagementProject.Services\\Mappings\\OrderProfile.cs",
+              "ToolTip": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Services\\Mappings\\OrderProfile.cs",
+              "RelativeToolTip": "ToyManagementProject.Services\\Mappings\\OrderProfile.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAA4AAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T18:00:28.049Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ToysController.cs",
-              "DocumentMoniker": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.API\\Controllers\\ToysController.cs",
-              "RelativeDocumentMoniker": "ToyManagementProject.API\\Controllers\\ToysController.cs",
-              "ToolTip": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.API\\Controllers\\ToysController.cs",
-              "RelativeToolTip": "ToyManagementProject.API\\Controllers\\ToysController.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAArwBkAAAACAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T17:07:31.971Z",
+              "WhenOpened": "2024-09-15T17:26:36.48Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Toy.cs",
-              "DocumentMoniker": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Domain\\Entities\\Toy.cs",
-              "RelativeDocumentMoniker": "ToyManagementProject.Domain\\Entities\\Toy.cs",
-              "ToolTip": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Domain\\Entities\\Toy.cs",
-              "RelativeToolTip": "ToyManagementProject.Domain\\Entities\\Toy.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAACAAAA",
+              "Title": "OrderController.cs",
+              "DocumentMoniker": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.API\\Controllers\\OrderController.cs",
+              "RelativeDocumentMoniker": "ToyManagementProject.API\\Controllers\\OrderController.cs",
+              "ToolTip": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.API\\Controllers\\OrderController.cs",
+              "RelativeToolTip": "ToyManagementProject.API\\Controllers\\OrderController.cs",
+              "ViewState": "AQIAAC8AAAAAAAAAAAAgwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-14T17:07:32.19Z",
+              "WhenOpened": "2024-09-15T17:19:48.879Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ToyProfile.cs",
+              "DocumentMoniker": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Services\\Mappings\\ToyProfile.cs",
+              "RelativeDocumentMoniker": "ToyManagementProject.Services\\Mappings\\ToyProfile.cs",
+              "ToolTip": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.Services\\Mappings\\ToyProfile.cs",
+              "RelativeToolTip": "ToyManagementProject.Services\\Mappings\\ToyProfile.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAoAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-15T17:06:40.649Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ToysController.cs",
+              "DocumentMoniker": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.API\\Controllers\\ToysController.cs",
+              "RelativeDocumentMoniker": "ToyManagementProject.API\\Controllers\\ToysController.cs",
+              "ToolTip": "C:\\GitHub\\ToyManagementProject\\ToyManagementProject\\ToyManagementProject.API\\Controllers\\ToysController.cs",
+              "RelativeToolTip": "ToyManagementProject.API\\Controllers\\ToysController.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAAawBkAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-15T17:00:44.609Z",
               "EditorCaption": ""
             }
           ]

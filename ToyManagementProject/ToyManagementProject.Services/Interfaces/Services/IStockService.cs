@@ -1,9 +1,9 @@
 ﻿using ToyManagementProject.Domain.Entities;
-using ToyManagementProject.Services.Dtos;
+using ToyManagementProject.Services.Dtos.Stock;
 
 namespace ToyManagementProject.Domain.Interfaces.Services
 {
-	public interface IStockService
+    public interface IStockService
 	{
 		Task<Result<StockDto>> GetStockByToyIdAsync(int id);
 		Task<Result<IList<StockDto>>> GetAllAsync();

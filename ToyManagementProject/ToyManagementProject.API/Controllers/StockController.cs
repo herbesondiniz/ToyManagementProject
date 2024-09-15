@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Services;
 using ToyManagementProject.Infra.Data.UoW;
-using ToyManagementProject.Services.Dtos;
+using ToyManagementProject.Services.Dtos.Stock;
 
 namespace StockManagementProject.API.Controllers
 {
-	[ApiController]
+    [ApiController]
 	[Route("[controller]")]
 	public class StockController : ControllerBase
 	{
@@ -50,27 +50,27 @@ namespace StockManagementProject.API.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> Create(StockDto dto)
+		public async Task<ActionResult> Create(CreateStockDto createStockdto)
 		{
-			var result = await _stockService.AddAsync(_mapper.Map<Stock>(dto));
+			var result = await _stockService.AddAsync(_mapper.Map<Stock>(createStockdto));
 
 			if (!result.IsSuccess)
 			{
 				return UnprocessableEntity(result.Errors);
 			}
 
-			return CreatedAtAction(nameof(GetById), new { id = dto.Id }, result);
+			return CreatedAtAction(nameof(GetById), new { id = result.Data.Id }, result);
 		}
 
 		[HttpPut("{id}")]
-		public async Task<ActionResult> Update(int id, StockDto stockDto)
+		public async Task<ActionResult> Update(int id, UpdateStockDto updateStockDto)
 		{
-			if (id != stockDto.Id)
+			if (id != updateStockDto.Id)
 			{
 				return BadRequest();
 			}
 
-			var result = await _stockService.UpdateAsync(_mapper.Map<Stock>(stockDto));
+			var result = await _stockService.UpdateAsync(_mapper.Map<Stock>(updateStockDto));
 			
 			if (!result.IsSuccess) 
 			{

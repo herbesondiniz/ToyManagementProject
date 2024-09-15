@@ -1,9 +1,9 @@
 ﻿using ToyManagementProject.Domain.Entities;
-using ToyManagementProject.Services.Dtos;
+using ToyManagementProject.Services.Dtos.Order;
 
 namespace ToyManagementProject.Domain.Interfaces.Services
 {
-	public interface IOrderService 
+    public interface IOrderService 
 	{	
 		Task<Result<OrderDto>> AddAsync(Order order);
 		Task<Result<IEnumerable<OrderDto>>> GetAllAsync();

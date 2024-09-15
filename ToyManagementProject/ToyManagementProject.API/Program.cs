@@ -53,6 +53,8 @@ builder.Services.AddScoped(typeof(IValidator<Order>), typeof(OrderValidator));
 builder.Services.AddScoped(typeof(IValidator<Toy>), typeof(ToyValidator));
 
 //AutoMapper
+builder.Services.AddAutoMapper(typeof(ToyProfile));
+builder.Services.AddAutoMapper(typeof(StockProfile));
 builder.Services.AddAutoMapper(typeof(OrderProfile));
 
 builder.Services.AddControllers();

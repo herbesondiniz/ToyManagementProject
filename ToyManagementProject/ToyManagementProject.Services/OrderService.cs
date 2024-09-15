@@ -4,8 +4,8 @@ using ToyManagementProject.Domain.Interfaces.Repositories;
 using ToyManagementProject.Domain.Interfaces.Services;
 using ToyManagementProject.Infra.Data.UoW;
 using AutoMapper;
-using ToyManagementProject.Services.Dtos;
 using Microsoft.EntityFrameworkCore;
+using ToyManagementProject.Services.Dtos.Order;
 
 namespace ToyManagementProject.Services
 {
@@ -33,6 +33,7 @@ namespace ToyManagementProject.Services
 			_uow = uow;
 			_mapper = mapper;
 		}
+
 		public async Task<Result<OrderDto>> AddAsync(Order order)
 		{
 			if (!order.IsValid())
@@ -130,6 +131,6 @@ namespace ToyManagementProject.Services
 				return Result<OrderDto>.Failure(new List<string> { $"Error UpdateAsync: {ex.Message}" });
 				throw;
 			}
-		}
+		}		
 	}
 }

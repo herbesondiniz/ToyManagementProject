@@ -4,11 +4,11 @@ using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Repositories;
 using ToyManagementProject.Domain.Interfaces.Services;
 using ToyManagementProject.Infra.Data.UoW;
-using ToyManagementProject.Services.Dtos;
+using ToyManagementProject.Services.Dtos.Stock;
 
 namespace ToyManagementProject.Services
 {
-	public class StockService : IStockService
+    public class StockService : IStockService
 	{		
 		private readonly IStockRepository _stockRepository;
 		private readonly IToyService _toyService;

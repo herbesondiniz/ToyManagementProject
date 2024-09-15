@@ -1,9 +1,9 @@
 ﻿using ToyManagementProject.Domain.Entities;
-using ToyManagementProject.Services.Dtos;
+using ToyManagementProject.Services.Dtos.OrderItem;
 
 namespace ToyManagementProject.Domain.Interfaces.Services
 {
-	public interface IOrderItemService
+    public interface IOrderItemService
 	{
 		Task<Result<List<OrderItemDto>>> GetAllAsync();
 		Task<OrderItem> GetByIdAsync(int id);

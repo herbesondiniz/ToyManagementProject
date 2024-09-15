@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
 using ToyManagementProject.Domain;
-using ToyManagementProject.Services.Dtos;
 using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Services;
 using ToyManagementProject.Infra.Data.UoW;
 using ToyManagementProject.Services.Validators.Interfaces;
 using ToyManagementProject.Domain.Interfaces.Repositories;
+using ToyManagementProject.Services.Dtos.Toy;
 
 namespace ToyManagementProject.Services
 {
-	public class ToyService : IToyService
+    public class ToyService : IToyService
 	{
 		private readonly IToyRepository _toyRepository;
 		private readonly IUnitOfWork _uow;

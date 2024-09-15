@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Services;
 using ToyManagementProject.Infra.Data.UoW;
-using ToyManagementProject.Services.Dtos;
+using ToyManagementProject.Services.Dtos.Order;
 
 namespace ToyManagementProject.API.Controllers
 {
@@ -51,9 +51,9 @@ namespace ToyManagementProject.API.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> Create(OrderDto orderDTO)
+		public async Task<ActionResult> Create(CreateOrderDto createOrderDto)
 		{
-			var order = _mapper.Map<Order>(orderDTO);
+			var order = _mapper.Map<Order>(createOrderDto);
 			
 			var result = await _orderService.AddAsync(order);
 
@@ -66,13 +66,13 @@ namespace ToyManagementProject.API.Controllers
 		}
 
 		[HttpPut("{id}")]
-		public async Task<ActionResult> Update(int id, OrderDto orderDto)
+		public async Task<ActionResult> Update(int id, UpdateOrderDto updateOrderDto)
 		{
-			if (id != orderDto.Id)
+			if (id != updateOrderDto.Id)
 			{
 				return BadRequest();
 			}
-			var result = await _toyService.UpdateAsync(_mapper.Map<Toy>(orderDto));
+			var result = await _toyService.UpdateAsync(_mapper.Map<Toy>(updateOrderDto));
 
 			if (!result.IsSuccess)
 			{

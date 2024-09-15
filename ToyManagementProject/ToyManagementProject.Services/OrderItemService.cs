@@ -3,11 +3,11 @@ using ToyManagementProject.Domain;
 using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Repositories;
 using ToyManagementProject.Domain.Interfaces.Services;
-using ToyManagementProject.Services.Dtos;
+using ToyManagementProject.Services.Dtos.OrderItem;
 
 namespace ToyManagementProject.Services
 {
-	public class OrderItemService : IOrderItemService
+    public class OrderItemService : IOrderItemService
 	{
 		private readonly IOrderItemRepository _orderItemRepository;
 		private readonly IMapper _mapper;

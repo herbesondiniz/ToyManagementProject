@@ -72,20 +72,20 @@ namespace ToyManagementProject.API.Controllers
 			{
 				return BadRequest();
 			}
-			var result = await _toyService.UpdateAsync(_mapper.Map<Toy>(updateOrderDto));
+			var result = await _orderService.UpdateAsync(_mapper.Map<Order>(updateOrderDto));
 
 			if (!result.IsSuccess)
 			{
 				return UnprocessableEntity(result.Errors);
 			}
 
-			return CreatedAtAction(nameof(GetById), new { id = result.Data.Id }, result.Data);
+			return NoContent();
 		}
 
 		[HttpDelete("{id}")]
 		public async Task<ActionResult> Delete(int id)
 		{
-			var result = await _orderService.GetByIdAsync(id);
+			var result = await _orderService.DeleteAsync(id);
 
 			if (!result.IsSuccess)
 				return UnprocessableEntity(result.Errors);

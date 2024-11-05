@@ -20,56 +20,58 @@ namespace ToyManagementProject.Services
 		{
 			try
 			{
-				foreach (var orderItem in order.Items)
+				var tasks = order.Items.Select(async orderItem =>
 				{
 					orderItem.SetOrderId(order.Id);
 
-					var resultToy = await _toyService.GetByIdAsync(orderItem.ToyId);					
-					
-					if (!resultToy.IsSuccess)
-					{
-						return Result<object>.Failure($"{resultToy.Errors}");
-					}
+					var toy = await FetchAndValidateToy(orderItem.ToyId);
+					if (toy == null) return Result<object>.Failure("Toy validation failed.");
 
-					var toy = _mapper.Map<Toy>(resultToy.Data);
+					orderItem.SetToy(toy);
 
-					if (!toy.IsValid()) 
-					{
-						return Result<object>.Failure($"{toy.ErrorsNotifications}");
-					}
+					var stock = await FetchAndValidateStock(orderItem.ToyId);
+					if (stock == null) return Result<object>.Failure("Stock validation failed.");
 
-					orderItem.SetToy(toy);										
-
-					var resultStock = await _stockService.GetStockByToyIdAsync(orderItem.ToyId);
-
-					if (!resultStock.IsSuccess) 
-					{
-						return Result<object>.Failure($"{resultStock.Errors}");
-					}
-
-					var stock = _mapper.Map<Stock>(resultStock.Data);
-
-					if (!stock.IsValid()) 
-					{
-						return Result<object>.Failure($"{stock.ErrorsNotifications}");
-					}
-																
 					stock.DeductFromStock(orderItem.Quantity);
-					
 					await _stockService.UpdateAsync(stock);
 
-				}
-				if (order.TotalAmount <= 0)
+					return Result<object>.Success("");
+				}).ToList();
+
+				var results = await Task.WhenAll(tasks);
+				if (results.Any(result => !result.IsSuccess))
 				{
-					return Result<object>.Failure($"Error calculating the total amount.");
+					return Result<object>.Failure("Failed to process one or more items.");
 				}
 
-				return Result<object>.Success("", "Order created");
+				if (order.TotalAmount <= 0)
+				{
+					return Result<object>.Failure("Error calculating the total amount.");
+				}
+
+				return Result<object>.Success("Order created");
 			}
 			catch (Exception ex)
 			{
 				return Result<object>.Failure($"An error occurred while processing the order: {ex.Message} ");
 			}
+		}
+		private async Task<Toy> FetchAndValidateToy(int toyId)
+		{
+			var result = await _toyService.GetByIdAsync(toyId);
+			if (!result.IsSuccess) return null;
+
+			var toy = _mapper.Map<Toy>(result.Data);
+			return toy.IsValid() ? toy : null;
+		}
+
+		private async Task<Stock> FetchAndValidateStock(int toyId)
+		{
+			var result = await _stockService.GetStockByToyIdAsync(toyId);
+			if (!result.IsSuccess) return null;
+
+			var stock = _mapper.Map<Stock>(result.Data);
+			return stock.IsValid() ? stock : null;
 		}
 	}
 }

@@ -12,21 +12,18 @@ namespace ToyManagementProject.API.Controllers
 	public class OrderController : Controller
 	{
 		private readonly IOrderService _orderService;
-		private readonly IToyService _toyService;
-		private readonly IOrderItemService _orderItemService;
+		private readonly IToyService _toyService;		
 		private readonly IStockService _stockService;
 		private readonly IUnitOfWork _uow;
 		private readonly IMapper _mapper;
 		public OrderController(IOrderService orderService,
-							   IToyService toyService,
-							   IOrderItemService orderItemService,
+							   IToyService toyService,							  
 							   IStockService stockService,
 							   IUnitOfWork uow,
 							   IMapper mapper)
 		{
 			_orderService = orderService;
-			_toyService = toyService;
-			_orderItemService = orderItemService;
+			_toyService = toyService;			
 			_stockService = stockService;
 			_uow = uow;
 			_mapper = mapper;

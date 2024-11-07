@@ -37,12 +37,10 @@ builder.Services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 // repositories
 builder.Services.AddScoped<IToyRepository,ToyRepository>();
-builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IStockRepository, StockRepository>();
 //Application
 builder.Services.AddScoped<IToyService, ToyService>();
-builder.Services.AddScoped<IOrderItemService, OrderItemService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IStockService, StockService>();
 builder.Services.AddScoped<IOrderProcessingService, OrderProcessingService>();

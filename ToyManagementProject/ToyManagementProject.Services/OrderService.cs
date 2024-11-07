@@ -11,23 +11,20 @@ namespace ToyManagementProject.Services
 {
 	public class OrderService : IOrderService
 	{
-		private readonly IOrderRepository _orderRepository;
-		private readonly IOrderItemService _orderItemService;
+		private readonly IOrderRepository _orderRepository;		
 		private readonly IOrderProcessingService _orderProcessingService;
 		//private readonly IValidator<Order> _orderValidator;
 		private readonly IUnitOfWork _uow;
 		private readonly IMapper _mapper;
 
-		public OrderService(IOrderRepository orderRepository,
-							IOrderItemService orderItemService,
+		public OrderService(IOrderRepository orderRepository,							
 							IOrderProcessingService orderProcessingService,
 							//IValidator<Order> orderValidator,
 							IUnitOfWork uow,
 							IMapper mapper
 							)
 		{
-			_orderRepository = orderRepository;
-			_orderItemService = orderItemService;
+			_orderRepository = orderRepository;			
 			_orderProcessingService = orderProcessingService;
 			//_orderValidator = orderValidator;
 			_uow = uow;
@@ -59,6 +56,33 @@ namespace ToyManagementProject.Services
 			catch (Exception ex)
 			{				
 				return Result<OrderDto>.Failure(new List<string> { $"An error occurred while processing the order: {ex.Message} " });
+			}
+		}
+		public async Task<Result<OrderDto>> UpdateAsync(Order order)
+		{
+			if (!order.IsValid())
+			{
+				return Result<OrderDto>.Failure(order.ErrorsNotifications);
+			}
+			
+			var processResult = await _orderProcessingService.ProcessOrderAsync(order);
+
+			if (!processResult.IsSuccess)
+			{
+				return Result<OrderDto>.Failure(processResult.Errors);
+			}
+
+			try
+			{
+				await _orderRepository.UpdateAsync(order);
+
+				await _uow.CommitAsync();
+
+				return Result<OrderDto>.Success(_mapper.Map<OrderDto>(order));				
+			}
+			catch (Exception ex)
+			{
+				return Result<OrderDto>.Failure(new List<string> { $"Error UpdateAsync: {ex.Message}" });				
 			}
 		}
 
@@ -110,27 +134,6 @@ namespace ToyManagementProject.Services
 				return Result<OrderDto>.Failure($"Error DeleteAsync: {ex.Message}");
 			}
 
-		}
-		public async Task<Result<OrderDto>> UpdateAsync(Order order)
-		{
-			if (!order.IsValid())
-			{
-				return Result<OrderDto>.Failure(order.ErrorsNotifications);
-			}
-
-			try
-			{
-				await _orderRepository.UpdateAsync(order);
-
-				await _uow.CommitAsync();
-
-				return Result<OrderDto>.Success(null, "Toy updated");
-			}
-			catch (Exception ex)
-			{
-				return Result<OrderDto>.Failure(new List<string> { $"Error UpdateAsync: {ex.Message}" });
-				throw;
-			}
-		}		
+		}				
 	}
 }

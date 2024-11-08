@@ -51,7 +51,7 @@ namespace ToyManagementProject.Services
 
 				await _uow.CommitAsync();
 
-				return Result<OrderDto>.Success(_mapper.Map<OrderDto>(order));
+				return Result<OrderDto>.Success(_mapper.Map<OrderDto>(order),"Order created");
 			}
 			catch (Exception ex)
 			{				
@@ -64,8 +64,28 @@ namespace ToyManagementProject.Services
 			{
 				return Result<OrderDto>.Failure(order.ErrorsNotifications);
 			}
-			
+			var oldOrder = await FetchAndValidateOrder(order.Id);
+			if (oldOrder == null) return Result<OrderDto>.Failure("Current Order not found");
+
+			foreach (var item in order.Items) 
+			{
+				var oldItem = oldOrder.Items.Where(i => i.Id == item.Id).FirstOrDefault();
+				if (oldItem != null)
+				{
+					item.SetQuantity(item.Quantity - oldItem.Quantity);
+				}
+			}
+
 			var processResult = await _orderProcessingService.ProcessOrderAsync(order);
+
+			foreach (var item in order.Items)
+			{
+				var oldItem = oldOrder.Items.Where(i => i.Id == item.Id).FirstOrDefault();
+				if (oldItem != null)
+				{
+					item.SetQuantity(item.Quantity + oldItem.Quantity);
+				}
+			}
 
 			if (!processResult.IsSuccess)
 			{
@@ -78,7 +98,7 @@ namespace ToyManagementProject.Services
 
 				await _uow.CommitAsync();
 
-				return Result<OrderDto>.Success(_mapper.Map<OrderDto>(order));				
+				return Result<OrderDto>.Success(_mapper.Map<OrderDto>(order),"Order Updated");				
 			}
 			catch (Exception ex)
 			{
@@ -133,7 +153,14 @@ namespace ToyManagementProject.Services
 			{
 				return Result<OrderDto>.Failure($"Error DeleteAsync: {ex.Message}");
 			}
+		}
+		private async Task<Order> FetchAndValidateOrder(int orderId)
+		{
+			var result = await GetByIdAsync(orderId);
+			if (!result.IsSuccess) return null;
 
-		}				
+			var order = _mapper.Map<Order>(result.Data);
+			return order.IsValid() ? order : null;
+		}
 	}
 }

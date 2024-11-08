@@ -1,50 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Repositories;
+using ToyManagementProject.Infra.Data.Context;
 
 namespace ToyManagementProject.Infra.Data.RepoEF
 {
 	public class StockRepository : IStockRepository
-	{
-		private readonly IRepositoryBase<Stock> _repository;
-        public StockRepository(IRepositoryBase<Stock> repository)
-        {
-			_repository = repository;			
-		}
-        public async Task AddAsync(Stock obj)
+	{		
+		private readonly ToyDbContext _context;		
+		public StockRepository(ToyDbContext context)
 		{
-			await _repository.AddAsync(obj);
+			_context = context;
+		}
+		public async Task AddAsync(Stock obj)
+		{
+			await _context.Set<Stock>().AddAsync(obj);
 		}
 
-		public async Task DeleteAsync(int id)
-		{
-			await _repository.DeleteAsync(id);	
+		public Task DeleteAsync(int id)
+		{			
+			var obj = GetByIdAsync(id).Result;
+			if (obj != null)
+			{
+				_context.Set<Stock>().Remove(obj);
+			}
+			return Task.CompletedTask;
 		}
 
 		public async Task<List<Stock>> GetAllAsync()
-		{
-			return await _repository.GetAllAsync();
+		{			
+			return await _context.Set<Stock>().AsNoTracking().ToListAsync();
 		}
 
 		public async Task<Stock> GetByIdAsync(int id)
-		{
-			return await _repository.GetByIdAsync(id);
+		{			
+			return await _context.Set<Stock>().AsNoTracking().Where(x => x.Id == id).FirstOrDefaultAsync();
 		}
 
-		public async Task<Stock> GetStockByToyIdAsync(int toyId)
+		public async Task<Stock?> GetStockByToyIdAsync(int toyId)
 		{								
-			var stocks = await _repository.GetAllAsync();
-			
-			return stocks.FirstOrDefault(x => x.ToyId == toyId);			
+			return await _context.Set<Stock>().AsNoTracking().FirstOrDefaultAsync(x => x.ToyId == toyId);								
 		}
 
-		public async Task UpdateAsync(Stock obj)
+		public Task UpdateAsync(Stock obj)
 		{
-			await _repository.UpdateAsync(obj);	
+			_context.Set<Stock>().Update(obj);
+
+			return Task.CompletedTask;
 		}
 	}
 }

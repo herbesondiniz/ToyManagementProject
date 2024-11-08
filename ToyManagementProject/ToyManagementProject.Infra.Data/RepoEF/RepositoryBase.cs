@@ -26,11 +26,12 @@ namespace ToyManagementProject.Infra.Data.RepoEF
 		}
 		public async Task<List<TEntity>> GetAllAsync()
 		{
-			return await _context.Set<TEntity>().ToListAsync();
+
+			return await _context.Set<TEntity>().AsNoTracking().ToListAsync();
 		}
 
 		public async Task<TEntity> GetByIdAsync(int id)
-		{
+		{			
 			return await _context.Set<TEntity>().FindAsync(id);
 		}
 		public async Task UpdateAsync(TEntity obj)

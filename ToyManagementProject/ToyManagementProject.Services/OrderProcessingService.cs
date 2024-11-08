@@ -8,16 +8,16 @@ namespace ToyManagementProject.Services
 	public class OrderProcessingService : IOrderProcessingService
 	{
 		private readonly IToyService _toyService;
-		private readonly IStockService _stockService;
+		private readonly IStockService _stockService;		
 		private readonly IMapper _mapper;
 		public OrderProcessingService(IToyService toyService, IStockService stockService, IMapper mapper)
 		{
 			_toyService = toyService;
-			_stockService = stockService;
-			_mapper = mapper;
+			_stockService = stockService;			
+			_mapper = mapper;			
 		}
 		public async Task<Result<object>> ProcessOrderAsync(Order order)
-		{
+		{			
 			try
 			{
 				var tasks = order.Items.Select(async orderItem =>
@@ -31,7 +31,7 @@ namespace ToyManagementProject.Services
 
 					var stock = await FetchAndValidateStock(orderItem.ToyId);
 					if (stock == null) return Result<object>.Failure("Stock validation failed.");
-
+					
 					stock.DeductFromStock(orderItem.Quantity);
 					await _stockService.UpdateAsync(stock);
 
@@ -49,7 +49,7 @@ namespace ToyManagementProject.Services
 					return Result<object>.Failure("Error calculating the total amount.");
 				}
 
-				return Result<object>.Success("Order created");
+				return Result<object>.Success("");
 			}
 			catch (Exception ex)
 			{

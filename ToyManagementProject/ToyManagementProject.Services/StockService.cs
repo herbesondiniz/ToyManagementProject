@@ -121,7 +121,7 @@ namespace ToyManagementProject.Services
 				return Result<StockDto>.Failure(stock.ErrorsNotifications);
 			}
 
-			var result = await _toyService.GetByIdAsync(stock.Id);
+			var result = await _toyService.GetByIdAsync(stock.ToyId);
 
 			if (!result.IsSuccess) 
 			{

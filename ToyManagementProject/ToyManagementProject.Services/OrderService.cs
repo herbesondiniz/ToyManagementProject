@@ -69,22 +69,20 @@ namespace ToyManagementProject.Services
 
 			foreach (var item in order.Items) 
 			{
-				var oldItem = oldOrder.Items.Where(i => i.Id == item.Id).FirstOrDefault();
-				if (oldItem != null)
-				{
-					item.SetQuantity(item.Quantity - oldItem.Quantity);
-				}
+				var oldItem = oldOrder.Items.FirstOrDefault(i => i.Id == item.Id);
+				if (oldItem == null) continue;
+				
+				item.SetQuantity(item.Quantity - oldItem.Quantity);				
 			}
 
 			var processResult = await _orderProcessingService.ProcessOrderAsync(order);
 
 			foreach (var item in order.Items)
 			{
-				var oldItem = oldOrder.Items.Where(i => i.Id == item.Id).FirstOrDefault();
-				if (oldItem != null)
-				{
-					item.SetQuantity(item.Quantity + oldItem.Quantity);
-				}
+				var oldItem = oldOrder.Items.FirstOrDefault(i => i.Id == item.Id);
+				if (oldItem == null) continue;
+
+				item.SetQuantity(item.Quantity + oldItem.Quantity);
 			}
 
 			if (!processResult.IsSuccess)

@@ -35,7 +35,7 @@ namespace ToyManagementProject.Infra.Data.RepoEF
 
 		public async Task<Toy> GetByIdAsync(int id)
 		{
-			return await _context.Set<Toy>().AsNoTracking().Where(x => x.Id == id).FirstOrDefaultAsync();
+			return await _context.Set<Toy>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
 		}
 
 		public Task UpdateAsync(Toy toy)

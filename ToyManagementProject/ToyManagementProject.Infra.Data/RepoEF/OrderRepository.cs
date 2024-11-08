@@ -49,7 +49,7 @@ namespace ToyManagementProject.Infra.Data.RepoEF
 				query = include(query);
 			}
 
-			return await query.AsNoTracking().Where(x => x.Id == id).FirstOrDefaultAsync();						
+			return await query.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);						
 		}
 
 		public Task UpdateAsync(Order obj)

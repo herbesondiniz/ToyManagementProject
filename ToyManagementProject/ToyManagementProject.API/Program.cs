@@ -32,8 +32,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ToyDbContext>(options =>
 	options.UseInMemoryDatabase("ToyCatalogDb"));
 
-builder.Services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
-
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 // repositories
 builder.Services.AddScoped<IToyRepository,ToyRepository>();

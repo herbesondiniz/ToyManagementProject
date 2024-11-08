@@ -14,8 +14,7 @@ namespace ToyManagementProject.Services
 		private readonly IToyService _toyService;
 		private readonly IUnitOfWork _uow;
 		private readonly IMapper _mapper;
-		public StockService(IRepositoryBase<Stock> repositoryBase,
-							IStockRepository stockRepository, 
+		public StockService(IStockRepository stockRepository, 
 							IUnitOfWork uow,
 							IToyService toyService,
 							IMapper mapper)

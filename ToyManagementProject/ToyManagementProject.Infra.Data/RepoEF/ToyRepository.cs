@@ -1,40 +1,48 @@
-﻿using ToyManagementProject.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using ToyManagementProject.Domain.Entities;
 using ToyManagementProject.Domain.Interfaces.Repositories;
+using ToyManagementProject.Infra.Data.Context;
 
 namespace ToyManagementProject.Infra.Data.RepoEF
 {
 	public class ToyRepository : IToyRepository
-	{
-		private readonly IRepositoryBase<Toy> _repository;
-
-        public ToyRepository(IRepositoryBase<Toy> repositoryBase)
-        {
-			_repository = repositoryBase;
+	{		
+		private readonly ToyDbContext _context;
+		
+		public ToyRepository(ToyDbContext context)
+		{
+			_context = context;
+		}
+		public async Task AddAsync(Toy toy)
+		{
+			await _context.Set<Toy>().AddAsync(toy);
 		}
 
-        public async Task AddAsync(Toy toy)
+		public Task DeleteAsync(int id)
 		{
-			await _repository.AddAsync(toy);
-		}
-
-		public async Task DeleteAsync(int id)
-		{
-			await _repository.DeleteAsync(id);
+			var obj = GetByIdAsync(id).Result;
+			if (obj != null)
+			{
+				_context.Set<Toy>().Remove(obj);
+			}
+			return Task.CompletedTask;
 		}
 
 		public async Task<List<Toy>> GetAllAsync()
-		{
-			return await _repository.GetAllAsync();
+		{			
+			return await _context.Set<Toy>().AsNoTracking().ToListAsync();
 		}
 
 		public async Task<Toy> GetByIdAsync(int id)
 		{
-			return await _repository.GetByIdAsync(id);
+			return await _context.Set<Toy>().AsNoTracking().Where(x => x.Id == id).FirstOrDefaultAsync();
 		}
 
-		public async Task UpdateAsync(Toy toy)
+		public Task UpdateAsync(Toy toy)
 		{
-			await _repository.UpdateAsync(toy);
+			_context.Set<Toy>().Update(toy);
+
+			return Task.CompletedTask;
 		}		
 	}
 }

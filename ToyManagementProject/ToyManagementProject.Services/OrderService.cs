@@ -64,7 +64,9 @@ namespace ToyManagementProject.Services
 			{
 				return Result<OrderDto>.Failure(order.ErrorsNotifications);
 			}
+			
 			var oldOrder = await FetchAndValidateOrder(order.Id);
+			
 			if (oldOrder == null) return Result<OrderDto>.Failure("Current Order not found");
 
 			foreach (var current in order.Items) 
@@ -108,7 +110,37 @@ namespace ToyManagementProject.Services
 				return Result<OrderDto>.Failure(new List<string> { $"Error UpdateAsync: {ex.Message}" });				
 			}
 		}
+		public async Task<Result<OrderDto>> DeleteAsync(int id)
+		{
+			var order = await _orderRepository.GetByIdAsync(id, q => q.Include(o => o.Items));
 
+			if (order == null)
+			{
+				return Result<OrderDto>.Failure($"Order doesn´t exists");
+			}
+
+			order.Items.ToList().ForEach(item => item.SetQuantity(item.Quantity * (-1)));//convert to negative qty
+
+			var processResult = await _orderProcessingService.ProcessOrderAsync(order);
+
+			if (!processResult.IsSuccess)
+			{
+				return Result<OrderDto>.Failure(processResult.Errors);
+			}
+
+			try
+			{
+				await _orderRepository.DeleteAsync(id);
+
+				await _uow.CommitAsync();
+
+				return Result<OrderDto>.Success(new OrderDto());
+			}
+			catch (Exception ex)
+			{
+				return Result<OrderDto>.Failure($"Error DeleteAsync: {ex.Message}");
+			}
+		}
 		public async Task<Result<IEnumerable<OrderDto>>> GetAllAsync()
 		{
 			var orders = await _orderRepository.GetAllAsync(q => q.Include(o=>o.Items));
@@ -133,30 +165,7 @@ namespace ToyManagementProject.Services
 			}			
 
 			return Result<OrderDto>.Success(_mapper.Map<OrderDto>(order));
-		}
-
-		public async Task<Result<OrderDto>> DeleteAsync(int id)
-		{
-			var order = await _orderRepository.GetByIdAsync(id);
-
-			if (order == null)
-			{
-				return Result<OrderDto>.Failure($"Order doesn´t exists");
-			}
-		
-			try
-			{
-				await _orderRepository.DeleteAsync(id);
-
-				await _uow.CommitAsync();
-
-				return Result<OrderDto>.Success(new OrderDto());
-			}
-			catch (Exception ex)
-			{
-				return Result<OrderDto>.Failure($"Error DeleteAsync: {ex.Message}");
-			}
-		}
+		}		
 		private async Task<Order> FetchAndValidateOrder(int orderId)
 		{
 			var result = await GetByIdAsync(orderId);

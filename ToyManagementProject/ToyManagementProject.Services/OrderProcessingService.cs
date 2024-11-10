@@ -32,7 +32,7 @@ namespace ToyManagementProject.Services
 					var stock = await FetchAndValidateStock(orderItem.ToyId);
 					if (stock == null) return Result<object>.Failure("Stock validation failed.");
 					
-					stock.DeductFromStock(orderItem.Quantity);
+					stock.UpdateStock(orderItem.Quantity);
 					
 					if(!stock.IsValid()) return Result<object>.Failure(stock.ErrorsNotifications);
 

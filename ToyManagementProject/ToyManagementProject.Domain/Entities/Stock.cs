@@ -50,11 +50,11 @@ namespace ToyManagementProject.Domain.Entities
 
 			Quantity = quantity;
 		}
-		public void DeductFromStock(int quantity) 
+		public void UpdateStock(int quantity) 
 		{			
 			if (quantity > Quantity) 
 			{
-				_errorsNotifications.Add($"Quantity of {Toy?.Name} is bigger than current stock ");
+				_errorsNotifications.Add($"Quantity of {ToyId} {Toy?.Name} is bigger than current stock ");
 				return;
 			}						
 

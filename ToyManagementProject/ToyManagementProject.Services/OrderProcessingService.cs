@@ -41,13 +41,8 @@ namespace ToyManagementProject.Services
 				var results = await Task.WhenAll(tasks);
 				if (results.Any(result => !result.IsSuccess))
 				{
-					return Result<object>.Failure("Failed to process one or more items.");
-				}
-
-				if (order.TotalAmount <= 0)
-				{
-					return Result<object>.Failure("Error calculating the total amount.");
-				}
+					return Result<object>.Failure(results.FirstOrDefault().Message);
+				}				
 
 				return Result<object>.Success("");
 			}

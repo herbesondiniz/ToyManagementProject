@@ -46,13 +46,7 @@ namespace ToyManagementProject.Domain.Entities
 			OrderId = orderId;
 		}
 		public void SetQuantity(int quantity)
-		{
-			if (quantity <= 0)
-			{
-				_errorsNotifications.Add("Quantity must be greater than zero");
-				return;
-			}
-
+		{						
 			Quantity = quantity;
 		}
 		public void SetPrice(decimal price)

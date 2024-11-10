@@ -67,28 +67,33 @@ namespace ToyManagementProject.Services
 			var oldOrder = await FetchAndValidateOrder(order.Id);
 			if (oldOrder == null) return Result<OrderDto>.Failure("Current Order not found");
 
-			foreach (var item in order.Items) 
+			foreach (var current in order.Items) 
 			{
-				var oldItem = oldOrder.Items.FirstOrDefault(i => i.Id == item.Id);
+				var oldItem = oldOrder.Items.FirstOrDefault(i => i.Id == current.Id);
 				if (oldItem == null) continue;
 				
-				item.SetQuantity(item.Quantity - oldItem.Quantity);				
+				current.SetQuantity(current.Quantity - oldItem.Quantity);//Set just diferential qty to stock 
 			}
 
 			var processResult = await _orderProcessingService.ProcessOrderAsync(order);
-
-			foreach (var item in order.Items)
-			{
-				var oldItem = oldOrder.Items.FirstOrDefault(i => i.Id == item.Id);
-				if (oldItem == null) continue;
-
-				item.SetQuantity(item.Quantity + oldItem.Quantity);
-			}
-
+			
 			if (!processResult.IsSuccess)
 			{
 				return Result<OrderDto>.Failure(processResult.Errors);
 			}
+
+			foreach (var current in order.Items)
+			{
+				var oldItem = oldOrder.Items.FirstOrDefault(i => i.Id == current.Id);
+				if (oldItem == null) continue;
+
+				current.SetQuantity(current.Quantity + oldItem.Quantity);//recovery current qty from current item
+			}
+
+			if (order.TotalAmount <= 0)
+			{
+				return Result<OrderDto>.Failure("Error calculating the total amount.");
+			}			
 
 			try
 			{

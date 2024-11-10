@@ -51,13 +51,7 @@ namespace ToyManagementProject.Domain.Entities
 			Quantity = quantity;
 		}
 		public void DeductFromStock(int quantity) 
-		{
-			if (quantity <= 0)
-			{
-				_errorsNotifications.Add($"Quantity must be bigger than 0");
-				return;
-			}
-
+		{			
 			if (quantity > Quantity) 
 			{
 				_errorsNotifications.Add($"Quantity is bigger than current stock");

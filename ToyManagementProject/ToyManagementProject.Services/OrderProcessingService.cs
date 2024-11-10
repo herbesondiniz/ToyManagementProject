@@ -16,7 +16,7 @@ namespace ToyManagementProject.Services
 			_stockService = stockService;			
 			_mapper = mapper;			
 		}
-		public async Task<Result<object>> ProcessOrderAsync(Order order)
+		public async Task<Result<object>> ProcessOrderStockAsync(Order order)
 		{			
 			try
 			{
@@ -71,6 +71,6 @@ namespace ToyManagementProject.Services
 
 			var stock = _mapper.Map<Stock>(result.Data);
 			return stock.IsValid() ? stock : null;
-		}
+		}		
 	}
 }

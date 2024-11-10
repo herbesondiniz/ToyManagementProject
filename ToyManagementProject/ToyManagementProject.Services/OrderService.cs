@@ -38,7 +38,7 @@ namespace ToyManagementProject.Services
 				return Result<OrderDto>.Failure(order.ErrorsNotifications);
 			}
 
-			var processResult = await _orderProcessingService.ProcessOrderAsync(order);
+			var processResult = await _orderProcessingService.ProcessOrderStockAsync(order);
 
 			if (!processResult.IsSuccess)
 			{
@@ -77,7 +77,7 @@ namespace ToyManagementProject.Services
 				current.SetQuantity(current.Quantity - oldItem.Quantity);//Set just diferential qty to stock 
 			}
 
-			var processResult = await _orderProcessingService.ProcessOrderAsync(order);
+			var processResult = await _orderProcessingService.ProcessOrderStockAsync(order);
 			
 			if (!processResult.IsSuccess)
 			{
@@ -121,7 +121,7 @@ namespace ToyManagementProject.Services
 
 			order.Items.ToList().ForEach(item => item.SetQuantity(item.Quantity * (-1)));//convert to negative qty
 
-			var processResult = await _orderProcessingService.ProcessOrderAsync(order);
+			var processResult = await _orderProcessingService.ProcessOrderStockAsync(order);
 
 			if (!processResult.IsSuccess)
 			{

@@ -42,9 +42,9 @@ namespace ToyManagementProject.Domain.Entities
 		}
 		public void SetQuantity(int quantity)
 		{
-			if (quantity <= 0)
+			if (quantity < 0)
 			{
-				_errorsNotifications.Add("quantity is required");
+				_errorsNotifications.Add("It's not allowed stock less than 0");
 				return;
 			}
 
@@ -54,7 +54,7 @@ namespace ToyManagementProject.Domain.Entities
 		{			
 			if (quantity > Quantity) 
 			{
-				_errorsNotifications.Add($"Quantity is bigger than current stock");
+				_errorsNotifications.Add($"Quantity of {Toy?.Name} is bigger than current stock ");
 				return;
 			}						
 

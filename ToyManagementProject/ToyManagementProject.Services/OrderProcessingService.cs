@@ -33,6 +33,9 @@ namespace ToyManagementProject.Services
 					if (stock == null) return Result<object>.Failure("Stock validation failed.");
 					
 					stock.DeductFromStock(orderItem.Quantity);
+					
+					if(!stock.IsValid()) return Result<object>.Failure(stock.ErrorsNotifications);
+
 					await _stockService.UpdateAsync(stock);
 
 					return Result<object>.Success("");
@@ -41,7 +44,8 @@ namespace ToyManagementProject.Services
 				var results = await Task.WhenAll(tasks);
 				if (results.Any(result => !result.IsSuccess))
 				{
-					return Result<object>.Failure(results.FirstOrDefault().Message);
+					var message = results.ToList().Where(x => !x.IsSuccess).FirstOrDefault().Errors;
+					return Result<object>.Failure(message);
 				}				
 
 				return Result<object>.Success("");
